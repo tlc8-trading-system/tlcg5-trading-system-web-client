@@ -38,7 +38,7 @@ export function Register() {
       password,
     };
     register.mutate(newUser);
-  };
+ };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4">
