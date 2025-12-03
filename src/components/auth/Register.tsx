@@ -12,6 +12,7 @@ import {
 } from "../ui/card";
 import { Lock, Mail, User } from "lucide-react";
 import { toast } from "sonner";
+import { RegisterUser } from "../../api/features/authentication/auth-queries";
 
 export function Register() {
   const [firstName, setFirstName] = useState("");
@@ -20,6 +21,7 @@ export function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const register = RegisterUser();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +30,15 @@ export function Register() {
       toast("Passwords do not match");
       return;
     }
-    toast("Registration successful, please log in");
+
+    const newUser = {
+      firstName,
+      lastName,
+      email,
+      password,
+    };
+    register.mutate(newUser);
+
     navigate("/login");
   };
 
