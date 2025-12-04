@@ -21,7 +21,7 @@ export function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
-  const register = RegisterUser();
+  const register = RegisterUser(navigate);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,8 +38,6 @@ export function Register() {
       password,
     };
     register.mutate(newUser);
-
-    navigate("/login");
   };
 
   return (
