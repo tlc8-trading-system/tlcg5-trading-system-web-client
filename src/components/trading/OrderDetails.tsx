@@ -5,15 +5,61 @@ import { Label } from "../ui/label";
 import { Search } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { Badge } from "../ui/badge";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import type { OrderMode, OrderType, Asset } from "../../types";
+import AssetList from "./AssetList";
+import { tradingAssets } from "../../data/mock-assets";
+import { toast } from "sonner";
 
 const OrderDetails = () => {
+  const navigate = useNavigate();
+  const [asset, setAsset] = useState("");
+  const [orderType, setOrderType] = useState<OrderType>("Buy");
+  const [quantity, setQuantity] = useState("");
+  const [price, setPrice] = useState("");
+  const [orderMode, setOrderMode] = useState<OrderMode>("Market");
+  const [showAssetList, setShowAssetList] = useState(false);
+  const [assetSearch, setAssetSearch] = useState("");
+
+  const total = Number(quantity) * Number(price || 0);
+
+  const filteredAssets: Asset[] = tradingAssets.filter(
+    (s) =>
+      s.symbol.toLowerCase().includes(assetSearch.toLowerCase()) ||
+      s.name.toLowerCase().includes(assetSearch.toLowerCase())
+  );
+
+  const handleAssetSelect = (selectedAsset: (typeof tradingAssets)[0]) => {
+    setAsset(selectedAsset.symbol);
+    setPrice(selectedAsset.price.toString());
+    setAssetSearch("");
+    setShowAssetList(false);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const orderDescription =
+      orderMode === "Market"
+        ? `${orderType} ${quantity} ${asset} at market price`
+        : `${orderType} ${quantity} ${asset} @ $${price} (limit)`;
+
+    toast.success("Order submitted successfully", {
+      description: orderDescription,
+    });
+
+    // Navigate to Orders page
+    setTimeout(() => {
+      navigate("/trading/orders");
+    }, 1000);
+  };
   return (
-    <Card className="shadow-sm">
+    <Card className="shadow-sm text-left">
       <CardHeader>
         <CardTitle>Order Details</CardTitle>
       </CardHeader>
       <CardContent>
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/** Choose order type: BUY / SELL */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
@@ -21,16 +67,18 @@ const OrderDetails = () => {
               <div className="grid grid-cols-2 gap-2">
                 <Button
                   type="button"
-                  variant="default"
-                  onClick={() => {}}
+                  variant={orderType === "Buy" ? "default" : "outline"}
+                  onClick={() => setOrderType("Buy")}
                   className="h-11"
                 >
                   Buy
                 </Button>
                 <Button
                   type="button"
-                  variant="outline"
-                  onClick={() => {}}
+                  variant={orderType === "Sell" ? "default" : "outline"}
+                  onClick={() => {
+                    setOrderType("Sell");
+                  }}
                   className="h-11"
                 >
                   Sell
@@ -44,16 +92,16 @@ const OrderDetails = () => {
               <div className="grid grid-cols-2 gap-2">
                 <Button
                   type="button"
-                  variant="default"
-                  onClick={() => {}}
+                  variant={orderMode === "Market" ? "default" : "outline"}
+                  onClick={() => setOrderMode("Market")}
                   className="h-11"
                 >
                   Market
                 </Button>
                 <Button
                   type="button"
-                  variant="outline"
-                  onClick={() => {}}
+                  variant={orderMode === "Limit" ? "default" : "outline"}
+                  onClick={() => setOrderMode("Limit")}
                   className="h-11"
                 >
                   Limit
@@ -65,19 +113,36 @@ const OrderDetails = () => {
           {/** Choose asset to trade */}
           <div className="space-y-4">
             <div className="space-y-2 relative">
-              <Label htmlFor="symbol">Asset</Label>
+              <Label htmlFor="asset">Asset</Label>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground z-10" />
                 <Input
-                  id="symbol"
-                  placeholder="Search symbols..."
-                  onChange={() => {}}
-                  onFocus={() => {}}
+                  id="asset"
+                  placeholder="Search assets..."
+                  value={asset || assetSearch}
+                  onChange={(e) => {
+                    const value = e.target.value.toUpperCase();
+                    if (asset) {
+                      setAsset(value);
+                    } else {
+                      setAssetSearch(value);
+                    }
+                    setShowAssetList(true);
+                  }}
+                  onFocus={() => setShowAssetList(true)}
                   className="pl-10"
                   autoComplete="off"
                   required
                 />
               </div>
+
+              {showAssetList && (assetSearch || !asset) && (
+                <AssetList
+                  filteredAssets={filteredAssets}
+                  handleStockSelect={handleAssetSelect}
+                  showAssetList={setShowAssetList}
+                />
+              )}
             </div>
 
             {/** Choose quantity and price */}
@@ -88,19 +153,23 @@ const OrderDetails = () => {
                   id="quantity"
                   type="number"
                   placeholder="100"
-                  onChange={() => {}}
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="price">Est. Price</Label>
+                <Label htmlFor="price">
+                  {orderMode === "Market" ? "Est. Price" : "Limit Price"}
+                </Label>
                 <Input
                   id="price"
                   type="number"
                   step="0.01"
                   placeholder="0.00"
-                  onChange={() => {}}
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
                   required
                 />
               </div>
@@ -113,28 +182,49 @@ const OrderDetails = () => {
           <div className="space-y-3 rounded-lg bg-muted/50 p-4">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Quantity</span>
-              <span>0</span>
+              <span>{quantity || 0}</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Price per share</span>
-              <span>$0</span>
+              <span>${Number(price || 0).toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Position Type</span>
-              <Badge variant="secondary">Buy</Badge>
+              <Badge variant={orderType === "Buy" ? "secondary" : "default"}>
+                {orderType === "Buy" ? "Short" : "Long"}
+              </Badge>
             </div>
             <Separator />
             <div className="flex justify-between">
               <span>Total</span>
-              <span className="text-lg">$0</span>
+              <span className="text-lg">
+                $
+                {total.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </span>
             </div>
           </div>
 
           <div className="flex gap-3">
-            <Button type="submit" className="flex-1 h-12" disabled>
+            <Button
+              type="submit"
+              className="flex-1 h-12"
+              disabled={!asset || !quantity || !price}
+            >
               Submit Order
             </Button>
-            <Button type="button" variant="outline" onClick={() => {}}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => {
+                setAsset("");
+                setQuantity("");
+                setPrice("");
+                setAssetSearch("");
+              }}
+            >
               Cancel
             </Button>
           </div>
