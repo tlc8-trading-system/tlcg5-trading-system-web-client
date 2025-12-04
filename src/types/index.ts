@@ -15,10 +15,18 @@ export interface RegisterRequest {
   password: string;
 }
 
-export type roles = "admin" | "trader";
 export interface Stock  {
     ticker: string;
     name: string;
     price: number;
     exchange: string
 }
+export interface Asset {
+  symbol: string;
+  name: string;
+  price: number;
+  exchange: string;
+}
+
+export type OrderType = "Buy" | "Sell";
+export type OrderMode = "Market" | "Limit";
