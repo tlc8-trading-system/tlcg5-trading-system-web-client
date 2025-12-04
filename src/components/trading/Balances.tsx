@@ -4,6 +4,7 @@ import { useUserBalance } from "../../api/features/user-balance/balance-queries"
 
 const Balances = () => {
   const { data, isLoading, error } = useUserBalance();
+  const balance = 50000;
   if (error) return <div>Failed to fetch user response</div>;
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -17,7 +18,7 @@ const Balances = () => {
             {isLoading
               ? "..."
               : JSON.stringify(data?.data) == undefined
-              ? 0
+              ? balance
               : JSON.stringify(data?.data)}
           </div>
         </CardContent>
