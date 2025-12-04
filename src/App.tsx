@@ -2,6 +2,7 @@ import { Toaster } from "sonner";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/Layout";
+import { PlaceOrderPage } from "./components/pages/PlaceOrderPage";
 
 const DashboardPages = ({ children }: { children: React.ReactNode }) => {
   return <Layout>{children}</Layout>;
@@ -18,7 +19,11 @@ function App() {
           />
           <Route
             path="/trading/place-order"
-            element={<DashboardPages>Place Order Page</DashboardPages>}
+            element={
+              <DashboardPages>
+                <PlaceOrderPage />
+              </DashboardPages>
+            }
           />
         </Routes>
         <Toaster position="top-center" />
