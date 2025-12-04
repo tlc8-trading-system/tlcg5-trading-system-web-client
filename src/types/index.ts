@@ -16,3 +16,9 @@ export interface RegisterRequest {
 }
 
 export type roles = "admin" | "trader";
+export interface Stock  {
+    ticker: string;
+    name: string;
+    price: number;
+    exchange: string
+}
