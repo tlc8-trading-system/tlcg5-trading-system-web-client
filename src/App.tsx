@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { PlaceOrderPage } from "./components/pages/PlaceOrderPage";
+import { OrdersPage } from "./components/pages/OrdersPage";
 
 const DashboardPages = ({ children }: { children: React.ReactNode }) => {
   return <Layout>{children}</Layout>;
@@ -22,6 +23,14 @@ function App() {
             element={
               <DashboardPages>
                 <PlaceOrderPage />
+              </DashboardPages>
+            }
+          />
+          <Route
+            path="/trading/orders"
+            element={
+              <DashboardPages>
+                <OrdersPage />
               </DashboardPages>
             }
           />
