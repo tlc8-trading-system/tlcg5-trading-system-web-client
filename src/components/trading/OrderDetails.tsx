@@ -7,10 +7,15 @@ import { Separator } from "../ui/separator";
 import { Badge } from "../ui/badge";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import type { OrderMode, OrderType, Asset } from "../../types";
+import { type OrderMode, type OrderType, type Asset } from "../../types";
 import AssetList from "./AssetList";
 import { tradingAssets } from "../../data/mock-assets";
-import { toast } from "sonner";
+import { PlaceOrder } from "../../api/features/orders/order-queries";
+import {
+  getOrderSide,
+  getOrderType,
+  type PlaceOrderRequest,
+} from "../../types/server";
 
 const OrderDetails = () => {
   const navigate = useNavigate();
@@ -21,6 +26,13 @@ const OrderDetails = () => {
   const [orderMode, setOrderMode] = useState<OrderMode>("Market");
   const [showAssetList, setShowAssetList] = useState(false);
   const [assetSearch, setAssetSearch] = useState("");
+
+  const orderDescription =
+    orderMode === "Market"
+      ? `${orderType} ${quantity} ${asset} at market price`
+      : `${orderType} ${quantity} ${asset} @ $${price} (limit)`;
+
+  const placeOrder = PlaceOrder(orderDescription, navigate);
 
   const total = Number(quantity) * Number(price || 0);
 
@@ -39,20 +51,17 @@ const OrderDetails = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const orderDescription =
-      orderMode === "Market"
-        ? `${orderType} ${quantity} ${asset} at market price`
-        : `${orderType} ${quantity} ${asset} @ $${price} (limit)`;
 
-    toast.success("Order submitted successfully", {
-      description: orderDescription,
-    });
+    const newOrder: PlaceOrderRequest = {
+      product: asset,
+      quantity,
+      side: getOrderSide(orderType),
+      type: getOrderType(orderMode),
+    };
 
-    // Navigate to Orders page
-    setTimeout(() => {
-      navigate("/trading/orders");
-    }, 1000);
+    placeOrder.mutate(newOrder);
   };
+
   return (
     <Card className="shadow-sm text-left">
       <CardHeader>
