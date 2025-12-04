@@ -20,6 +20,10 @@ function App() {
             path="/dashboard"
             element={<DashboardPages>Dashboard Home</DashboardPages>}
           />
+          <Route
+            path="/trading/place-order"
+            element={<DashboardPages>Place Order Page</DashboardPages>}
+          />
         </Routes>
         <Toaster position="top-center" />
       </BrowserRouter>
