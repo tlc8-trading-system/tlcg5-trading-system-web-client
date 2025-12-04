@@ -1,28 +1,24 @@
-import { useEffect } from "react";
-import { useUsers } from "./api/features/users/user-queries";
+import { Toaster } from "sonner";
 import "./App.css";
-import type { User } from "./types/mock";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Layout } from "./components/Layout";
+
+const DashboardPages = ({ children }: { children: React.ReactNode }) => {
+  return <Layout>{children}</Layout>;
+};
 
 function App() {
-  const { data, isLoading, error } = useUsers<User[]>();
-  const users = Array.isArray(data) ? data : [];
-
-  useEffect(() => {
-    //console.log("data: ", data);
-  });
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>An error occured</p>;
   return (
     <>
-      <h1 className="text-5xl text-primary">Hello</h1>
-      <p>User list</p>
-      <div>
-        {users.map((user) => {
-          return <p>{user.name}</p>;
-        })}{" "}
-        {/** Render all users */}
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/dashboard"
+            element={<DashboardPages>Dashboard Home</DashboardPages>}
+          />
+        </Routes>
+        <Toaster position="top-center" />
+      </BrowserRouter>
     </>
   );
 }
