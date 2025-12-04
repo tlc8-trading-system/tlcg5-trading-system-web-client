@@ -180,6 +180,7 @@ const OrderDetails = () => {
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                   required
+                  disabled={orderMode == "Market"}
                 />
               </div>
             </div>
