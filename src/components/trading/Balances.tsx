@@ -1,31 +1,39 @@
-import { DollarSign, TrendingUp } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-
+import { TrendingUp } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { useUserBalance } from "../../api/features/user-balance/balance-queries";
 
 const Balances = () => {
+  const { data, isLoading, error } = useUserBalance();
+  if (error) return <div>Failed to fetch user response</div>;
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card className="shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm">Available Balance</CardTitle>
-            <DollarSign className="size-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl">$50,000</div>
-          </CardContent>
-        </Card>
+      <Card className="shadow-sm">
+        <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+          <CardTitle className="text-sm">Available Balance</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl text-right">
+            $
+            {isLoading
+              ? "..."
+              : JSON.stringify(data?.data) == undefined
+              ? 0
+              : JSON.stringify(data?.data)}
+          </div>
+        </CardContent>
+      </Card>
 
-        <Card className="shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm">Buying Power</CardTitle>
-            <TrendingUp className="size-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl">$200,000</div>
-          </CardContent>
-        </Card>
-      </div>
-  )
-}
+      <Card className="shadow-sm">
+        <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+          <CardTitle className="text-sm">Current Balance</CardTitle>
+          <TrendingUp className="size-4 text-muted-foreground" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl text-right">$200,000</div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
 
-export default Balances
+export default Balances;
