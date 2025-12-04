@@ -6,6 +6,7 @@ import { Login } from "./components/auth/Login";
 import { Register } from "./components/auth/Register";
 import { PlaceOrderPage } from "./components/pages/PlaceOrderPage";
 import { useAuth } from "./hooks/useAuth";
+import { OrdersPage } from "./components/pages/OrdersPage";
 
 const DashboardPages = ({ children }: { children: React.ReactNode }) => {
   return <Layout>{children}</Layout>;
@@ -47,6 +48,14 @@ function App() {
               }
             />
           }
+          />
+          <Route
+            path="/trading/orders"
+            element={
+              <DashboardPages>
+                <OrdersPage />
+              </DashboardPages>
+            }
           />
         </Routes>
         <Toaster position="top-center" />
