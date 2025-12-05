@@ -1,3 +1,4 @@
+import { CancelOrder } from "../../api/features/orders/order-queries";
 import { formatDate } from "../../lib/utils";
 import type { Order } from "../../types";
 import { Badge } from "../ui/badge";
@@ -5,13 +6,11 @@ import { Button } from "../ui/button";
 
 interface PendingOrderTileProps {
   order: Order;
-  handleCancelOrder: (orderId: string) => void;
 }
 
-const PendingOrderTile: React.FC<PendingOrderTileProps> = ({
-  order,
-  handleCancelOrder,
-}) => {
+const PendingOrderTile: React.FC<PendingOrderTileProps> = ({ order }) => {
+  const cancelOrder = CancelOrder();
+
   return (
     <div
       key={order.id}
@@ -44,7 +43,7 @@ const PendingOrderTile: React.FC<PendingOrderTileProps> = ({
       <Button
         size="sm"
         variant="outline"
-        onClick={() => handleCancelOrder(order.id)}
+        onClick={() => cancelOrder.mutate(order.id)}
       >
         Cancel
       </Button>

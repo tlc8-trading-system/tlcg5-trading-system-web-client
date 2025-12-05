@@ -23,7 +23,7 @@ const PendingOrders = () => {
         )}
         <div className="space-y-3">
           {pendingOrders.map((order) => (
-            <PendingOrderTile order={order} handleCancelOrder={() => {}} />
+            <PendingOrderTile order={order} />
           ))}
         </div>
 
