@@ -4,7 +4,7 @@ import { getUserBalance } from "./balance-api";
 import type { ServerResponse } from "../../../types/server";
 
 export const useUserBalance = () => {
-  return useQuery<ServerResponse>({
+  return useQuery<ServerResponse<number>>({
     queryKey: queryKeys.balance,
     queryFn: getUserBalance,
   });
