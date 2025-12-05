@@ -1,8 +1,8 @@
 import type { OrderMode, OrderType } from ".";
 
-export interface ServerResponse {
+export interface ServerResponse<T> {
   message: string;
-  data: object;
+  data: T[];
 }
 
 export interface PlaceOrderRequest {

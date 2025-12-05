@@ -1,21 +1,33 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import PendingOrderTile from "./PendingOrderTile";
-import { mockPendingOrders } from "../../data/mock-orders";
+import { usePendingOrders } from "../../api/features/orders/order-queries";
+import type { Order } from "../../types";
 
 const PendingOrders = () => {
+  const { data, isLoading, error } = usePendingOrders();
+
+  let pendingOrders: Order[] = [];
+  if (data?.data) pendingOrders = data.data;
+
   return (
     <Card className="shadow-sm text-left">
       <CardHeader>
-        <CardTitle>Pending Orders (2)</CardTitle>
+        <CardTitle>
+          Pending Orders ({isLoading ? "..." : pendingOrders.length})
+        </CardTitle>
       </CardHeader>
+
       <CardContent>
+        {error && (
+          <p className="text-destructive">An error occured, please try again</p>
+        )}
         <div className="space-y-3">
-          {mockPendingOrders.map((order) => (
+          {pendingOrders.map((order) => (
             <PendingOrderTile order={order} handleCancelOrder={() => {}} />
           ))}
         </div>
 
-        {mockPendingOrders.length === 0 && (
+        {pendingOrders.length === 0 && (
           <div className="text-center py-12 text-muted-foreground">
             No pending orders
           </div>
