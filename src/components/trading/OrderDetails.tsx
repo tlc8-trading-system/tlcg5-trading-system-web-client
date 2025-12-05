@@ -177,7 +177,7 @@ const OrderDetails = () => {
                   type="number"
                   step="0.01"
                   placeholder="0.00"
-                  value={price}
+                  value={(+price).toFixed(2)}
                   onChange={(e) => setPrice(e.target.value)}
                   required
                   disabled={orderMode == "Market"}
