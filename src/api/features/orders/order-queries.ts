@@ -1,10 +1,11 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { fetchPendingOrders, placeOrder } from "./order-api";
+import { cancelOrder, fetchPendingOrders, placeOrder } from "./order-api";
 import { toast } from "sonner";
 import type { NavigateFunction } from "react-router-dom";
 import { queryKeys } from "../../query-keys";
 import type { ServerResponse } from "../../../types/server";
 import type { Order } from "../../../types";
+import queryClient from "../../query-client";
 
 export const PlaceOrder = (
   orderDescription: string,
@@ -21,6 +22,20 @@ export const PlaceOrder = (
     mutationFn: placeOrder,
     onSuccess,
     onError: () => toast("Unable to place order, please try again later"),
+  });
+};
+
+export const CancelOrder = (
+) => {
+  const onSuccess = () => {
+    toast("Order cancelled successfully")
+    queryClient.invalidateQueries({queryKey: queryKeys.pendingOrders})
+  };
+
+  return useMutation({
+    mutationFn: cancelOrder,
+    onSuccess,
+    onError: () => toast("Failed to cancel order"),
   });
 };
 
