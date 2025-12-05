@@ -16,6 +16,7 @@ import {
   getOrderType,
   type PlaceOrderRequest,
 } from "../../types/server";
+import { checkIfUserOwnsAsset } from "../../services/order-service";
 
 const OrderDetails = () => {
   const navigate = useNavigate();
@@ -200,8 +201,8 @@ const OrderDetails = () => {
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Position Type</span>
-              <Badge variant={orderType === "Buy" ? "secondary" : "default"}>
-                {orderType === "Buy" ? "Short" : "Long"}
+              <Badge variant={checkIfUserOwnsAsset() ? "default" : "secondary"}>
+                {checkIfUserOwnsAsset() ? "Long" : "Short"}
               </Badge>
             </div>
             <Separator />
