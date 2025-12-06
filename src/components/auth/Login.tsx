@@ -5,15 +5,19 @@ import { Lock, Mail } from "lucide-react";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLoginUser } from "../../hooks/useLoginUser";
 
 export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const loginMutation = useLoginUser(navigate);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        navigate("/dashboard");
+
+        if (loginMutation.isPending) return;
+        loginMutation.mutate({ email, password });
     };
     return (
         <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4">
@@ -66,7 +70,9 @@ export function Login() {
                         </div>
 
                         <div className="space-y-3">
-                            <Button type="submit" className="w-full h-11">Sign In</Button>
+                            <Button type="submit" className="w-full h-11" disabled={loginMutation.isPending}>
+                                {loginMutation.isPending ? "Signing In..." : "Sign In"}
+                            </Button>
                         </div>
 
                     </form>
