@@ -11,7 +11,7 @@ const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
   return (
     <tr
       key={trade.id}
-      className="w-full flex items-center justify-between border-b border-border hover:bg-muted/30 transition-colors"
+      className="w-full flex items-center justify-between border-b border-border hover:bg-muted/30 transition-colors text-left"
     >
       <td className="py-4 px-2">{trade.symbol}</td>
       <td className="py-4 px-2">
