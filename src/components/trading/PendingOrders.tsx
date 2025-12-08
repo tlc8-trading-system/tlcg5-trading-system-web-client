@@ -1,12 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import PendingOrderTile from "./PendingOrderTile";
 import { usePendingOrders } from "../../api/features/orders/order-queries";
-import type { Order } from "../../types";
+import type { PendingOrder } from "../../types";
 
 const PendingOrders = () => {
   const { data, isLoading, error } = usePendingOrders();
 
-  let pendingOrders: Order[] = [];
+  let pendingOrders: PendingOrder[] = [];
   if (data?.data) pendingOrders = data.data;
 
   return (
