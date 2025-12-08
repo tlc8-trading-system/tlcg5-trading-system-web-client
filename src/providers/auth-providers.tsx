@@ -8,23 +8,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   const getNewAccessToken = () => {
-    return "new-access-token"; 
+    return "new-access-token";
   };
 
   const login = (user: User, accessToken: string) => {
     setUser(mockUser);
-  
-  sessionStorage.setItem("user", JSON.stringify(user));
-  sessionStorage.setItem("access-token", accessToken);
+
+    sessionStorage.setItem("user", JSON.stringify(user));
+    sessionStorage.setItem("access-token", accessToken);
   };
 
   const logout = () => {
     setUser(null);
-    sessionStorage.clear()
+    sessionStorage.clear();
   };
 
   useEffect(() => {
-    
     const fetchAlreadyLoggedInUser = () => {
       const browserUser = sessionStorage.getItem("user");
       let accessToken = sessionStorage.getItem("access-token");

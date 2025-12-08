@@ -6,7 +6,7 @@ import type { NavigateFunction } from "react-router-dom";
 export const RegisterUser = (navigate: NavigateFunction) => {
   const onSuccess = () => {
     toast("Registration successful, please log in");
-    navigate("/login");
+    navigate("/dashboard");
   };
   
   return useMutation({
