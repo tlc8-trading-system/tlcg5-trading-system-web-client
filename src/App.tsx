@@ -58,13 +58,17 @@ function App() {
               </DashboardPages>
             }
           />
-          
+
           <Route
           path="/portfolios"
           element={
+            <ProtectedRoute
+              element={
             <DashboardPages>
               <PortfolioList/>
             </DashboardPages>
+          }
+            />
           }
           />
         </Routes>
