@@ -1,4 +1,4 @@
-import { CancelOrder } from "../../api/features/orders/order-queries";
+import { CancelOrder } from "../../api/features/pending-orders/pending-order-queries";
 import { formatDate } from "../../lib/utils";
 import type { PendingOrder } from "../../types";
 import { Badge } from "../ui/badge";
