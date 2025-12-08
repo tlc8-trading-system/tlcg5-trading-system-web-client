@@ -54,7 +54,19 @@ export type OrderPosition = "Short" | "Long";
 export type OrderMode = "Market" | "Limit";
 export type OrderStatus = "Pending" | "Partial" | "Closed" | "Canceled"
 
-export interface Order {
+export interface ActiveTrade {
+  id: string;
+  symbol: string;
+  type: string;
+  quantity: number;
+  entryPrice: number;
+  currentPrice: number;
+  profitLoss: number;
+  profitLossPercent: number;
+  openDate: string;
+}
+
+export interface PendingOrder {
   id: string;
   symbol: string;
   type: string;

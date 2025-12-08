@@ -1,3 +1,39 @@
+export const mockActivePositions = [
+  {
+    id: 'TRD-001',
+    symbol: 'TSLA',
+    type: "Long" ,
+    quantity: 50,
+    entryPrice: 245.50,
+    currentPrice: 252.30,
+    profitLoss: 340.00,
+    profitLossPercent: 2.77,
+    openDate: '2025-11-28',
+  },
+  {
+    id: 'TRD-002',
+    symbol: 'NVDA',
+    type: 'Long',
+    quantity: 100,
+    entryPrice: 495.75,
+    currentPrice: 498.20,
+    profitLoss: 245.00,
+    profitLossPercent: 0.49,
+    openDate: '2025-11-30',
+  },
+  {
+    id: 'TRD-003',
+    symbol: 'AMZN',
+    type: 'Short',
+    quantity: 30,
+    entryPrice: 152.80,
+    currentPrice: 151.20,
+    profitLoss: 48.00,
+    profitLossPercent: 1.05,
+    openDate: '2025-11-29',
+  },
+];
+
 export const mockPendingOrders = [
   {
     id: 'ORD-001',
