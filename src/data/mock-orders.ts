@@ -1,4 +1,4 @@
-export const mockActivePositions = [
+export const mockActiveTrades = [
   {
     id: 'TRD-001',
     symbol: 'TSLA',

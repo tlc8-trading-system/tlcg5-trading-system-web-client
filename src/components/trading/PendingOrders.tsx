@@ -2,12 +2,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import PendingOrderTile from "./PendingOrderTile";
 import { usePendingOrders } from "../../api/features/orders/order-queries";
 import type { PendingOrder } from "../../types";
+import { mockPendingOrders } from "../../data/mock-orders";
 
 const PendingOrders = () => {
   const { data, isLoading, error } = usePendingOrders();
 
   let pendingOrders: PendingOrder[] = [];
   if (data?.data) pendingOrders = data.data;
+  if (error) pendingOrders = mockPendingOrders;
 
   return (
     <Card className="shadow-sm text-left">
