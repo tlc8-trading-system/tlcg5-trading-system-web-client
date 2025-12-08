@@ -32,8 +32,8 @@ const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
       >
         <td className="py-4 px-2">{trade.symbol}</td>
         <td className="py-4 px-2">
-          <Badge variant={trade.type === "Long" ? "default" : "secondary"}>
-            {trade.type}
+          <Badge variant={trade.position === "Long" ? "default" : "secondary"}>
+            {trade.position}
           </Badge>
         </td>
         <td className="text-right py-4 px-2">{trade.quantity}</td>
@@ -83,6 +83,7 @@ const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
         </td>
       </tr>
       <ModifyPosition
+        trade={trade}
         handleSaveModify={saveTradeModification}
         modifyData={modifyTradeData}
         setModifyData={setModifyTradeData}
