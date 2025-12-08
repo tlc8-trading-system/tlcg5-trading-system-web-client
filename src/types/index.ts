@@ -66,6 +66,13 @@ export interface ActiveTrade {
   openDate: string;
 }
 
+export interface ModifyActiveTrade {
+  id: string;
+  symbol: string;
+  stopLoss: string;
+  takeProfit: string;
+}
+
 export interface PendingOrder {
   id: string;
   symbol: string;
