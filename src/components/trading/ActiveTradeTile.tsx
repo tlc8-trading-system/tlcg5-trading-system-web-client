@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import type { ActiveTrade } from "../../types";
 import { useState } from "react";
 import ModifyPosition from "../modals/ModifyPosition";
-import { CloseActiveTrade, ModifyActiveTrade } from "../../api/features/orders/order-queries";
+import { CloseActiveTrade, ModifyActiveTrade } from "../../api/features/active-orders/active-order-queries";
 
 interface ActiveTradeTileProps {
   trade: ActiveTrade;

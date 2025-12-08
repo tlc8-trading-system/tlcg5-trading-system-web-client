@@ -1,9 +1,9 @@
-import { useActiveTrades } from "../../api/features/orders/order-queries";
 import { mockActiveTrades } from "../../data/mock-orders";
 import type { ActiveTrade } from "../../types";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import ActiveTradeTile from "./ActiveTradeTile";
 import { Spinner } from "../ui/spinner";
+import { useActiveTrades } from "../../api/features/active-orders/active-order-queries";
 
 const ActiveTrades = () => {
   const { data, isLoading, error } = useActiveTrades();

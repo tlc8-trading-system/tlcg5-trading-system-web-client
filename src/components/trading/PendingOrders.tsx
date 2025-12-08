@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import PendingOrderTile from "./PendingOrderTile";
-import { usePendingOrders } from "../../api/features/orders/order-queries";
+import { usePendingOrders } from "../../api/features/pending-orders/pending-order-queries";
 import type { PendingOrder } from "../../types";
 import { mockPendingOrders } from "../../data/mock-orders";
 

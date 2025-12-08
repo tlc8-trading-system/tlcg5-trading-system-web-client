@@ -10,7 +10,7 @@ import { useState } from "react";
 import { type OrderMode, type OrderType, type Asset } from "../../types";
 import AssetList from "./AssetList";
 import { tradingAssets } from "../../data/mock-assets";
-import { PlaceOrder } from "../../api/features/orders/order-queries";
+import { PlaceOrder } from "../../api/features/pending-orders/pending-order-queries";
 import {
   getOrderSide,
   getOrderType,
