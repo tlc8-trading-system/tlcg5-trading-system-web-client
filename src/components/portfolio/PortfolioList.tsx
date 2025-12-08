@@ -1,28 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "../ui/button";
-import { Activity, Plus, TrendingDown, TrendingUp } from "lucide-react";
+import { Activity, TrendingDown, TrendingUp } from "lucide-react";
 import { mockPortfolios } from "../../data/mock-portfolios";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import DashboardPagesHeader from "../shared/dashboard-pages-header";
 
 export function PortfolioList() {
 const navigate = useNavigate();
 
 return (
   <div className="space-y-8">
-    <div className="flex items-center justify-between">
-        <DashboardPagesHeader
-        pageTitle="Portfolios"
-        pageDescription="Manage your investment portfolios"
-      />
-
-
-        <Button onClick={() => navigate('/portfolio/create')} className="h-10">
-            <Plus className="size-4 mr-2" />
-            Create Portfolio
-        </Button>
-    </div>
-
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {mockPortfolios.map((portfolio) => (
             <Card
