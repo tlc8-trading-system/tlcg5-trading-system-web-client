@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { TrendingUp, Menu, X, Activity } from "lucide-react";
+import { TrendingUp, Menu, X, Briefcase, Activity } from "lucide-react";
 import { useState } from "react";
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -8,6 +8,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   const navigation = [
     { name: "Place Order", path: "/trading/place-order", icon: TrendingUp },
+    {name: "Portfolios", path: "/portfolios", icon: Briefcase },
     { name: 'Orders', path: '/trading/orders', icon: Activity },
   ];
 
