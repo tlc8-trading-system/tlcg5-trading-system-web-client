@@ -32,8 +32,8 @@ export function Register() {
     }
 
     const newUser = {
-      firstName,
-      lastName,
+      firstname: firstName,
+      lastname: lastName,
       email,
       password,
     };
@@ -56,9 +56,9 @@ export function Register() {
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                     <Input
-                      id="name"
+                      id="fname"
                       type="text"
-                      placeholder="Vince"
+                      placeholder="Samuella"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                       className="pl-10"
@@ -71,9 +71,9 @@ export function Register() {
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                     <Input
-                      id="name"
+                      id="lname"
                       type="text"
-                      placeholder="Ankrah"
+                      placeholder="Aglago"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                       className="pl-10"
@@ -90,7 +90,7 @@ export function Register() {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="you@example.com"
+                    placeholder="samuella@turntabl.io"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="pl-10"

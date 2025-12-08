@@ -13,7 +13,7 @@ const DashboardPages = ({ children }: { children: React.ReactNode }) => {
 };
 
 const ProtectedRoute = ({ element }: { element: React.ReactElement }) => {
-  const { isAuthenticated } = useAuth(); 
+  const { isAuthenticated } = useAuth();
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
@@ -32,22 +32,22 @@ function App() {
             path="/dashboard"
             element={
               <ProtectedRoute
-            element={<DashboardPages>Dashboard Home</DashboardPages>}
-          />
+                element={<DashboardPages>Dashboard Home</DashboardPages>}
+              />
             }
           />
 
           <Route
             path="/trading/place-order"
-          element={
-            <ProtectedRoute
-              element={
-                <DashboardPages>
-                  <PlaceOrderPage />
-                </DashboardPages>
-              }
-            />
-          }
+            element={
+              <ProtectedRoute
+                element={
+                  <DashboardPages>
+                    <PlaceOrderPage />
+                  </DashboardPages>
+                }
+              />
+            }
           />
           <Route
             path="/trading/orders"
