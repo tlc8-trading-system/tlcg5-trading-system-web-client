@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
-import ActivePositions from "../trading/ActivePositions";
+import ActiveTrades from "../trading/ActiveTrades";
 import PendingOrders from "../trading/PendingOrders";
 import DashboardPagesHeader from "../shared/dashboard-pages-header";
 
@@ -19,10 +19,7 @@ export function OrdersPage() {
         </TabsList>
 
         <TabsContent value="positions" className="space-y-4">
-          <ActivePositions
-            handleModifyPosition={() => {}}
-            handleClosePosition={() => {}}
-          />
+          <ActiveTrades />
         </TabsContent>
 
         <TabsContent value="pending" className="space-y-4">

@@ -1,11 +1,11 @@
 import { CancelOrder } from "../../api/features/orders/order-queries";
 import { formatDate } from "../../lib/utils";
-import type { Order } from "../../types";
+import type { PendingOrder } from "../../types";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 
 interface PendingOrderTileProps {
-  order: Order;
+  order: PendingOrder;
 }
 
 const PendingOrderTile: React.FC<PendingOrderTileProps> = ({ order }) => {
