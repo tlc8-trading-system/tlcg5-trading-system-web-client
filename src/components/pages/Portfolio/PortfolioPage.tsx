@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import { PortfolioList } from "../../portfolio/Portfolios";
+import { PortfolioList } from "../../portfolio/PortfolioList";
 import DashboardPagesHeader from "../../shared/dashboard-pages-header";
 import { Button } from "../../ui/button";
 import { useNavigate } from "react-router-dom";
