@@ -11,7 +11,7 @@ import {
 } from "../ui/dialog";
 import type { ActiveTrade, ModifyActiveTrade } from "../../types";
 
-interface ModifyPositionProps {
+interface ModifyTradeProps {
   trade: ActiveTrade;
   showModifyDialog: boolean;
   setShowModifyDialog: (state: boolean) => void;
@@ -20,7 +20,7 @@ interface ModifyPositionProps {
   handleSaveModify: () => void;
 }
 
-const ModifyPosition: React.FC<ModifyPositionProps> = ({
+const ModifyTrade: React.FC<ModifyTradeProps> = ({
   trade,
   showModifyDialog,
   setShowModifyDialog,
@@ -127,4 +127,4 @@ const ModifyPosition: React.FC<ModifyPositionProps> = ({
   );
 };
 
-export default ModifyPosition;
+export default ModifyTrade;

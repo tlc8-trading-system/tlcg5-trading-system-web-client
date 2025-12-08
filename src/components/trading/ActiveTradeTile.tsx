@@ -3,8 +3,8 @@ import { Edit2, TrendingDown, TrendingUp, X } from "lucide-react";
 import { Button } from "../ui/button";
 import type { ActiveTrade } from "../../types";
 import { useState } from "react";
-import ModifyPosition from "../modals/ModifyPosition";
 import { CloseActiveTrade, ModifyActiveTrade } from "../../api/features/active-orders/active-order-queries";
+import ModifyTrade from "../modals/ModifyTrade";
 
 interface ActiveTradeTileProps {
   trade: ActiveTrade;
@@ -87,7 +87,7 @@ const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
           </div>
         </td>
       </tr>
-      <ModifyPosition
+      <ModifyTrade
         trade={trade}
         handleSaveModify={saveTradeModification}
         modifyData={modifyTradeData}
