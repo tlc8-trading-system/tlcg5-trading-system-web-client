@@ -17,6 +17,10 @@ export const modifyActiveTrade = async (newTradeData: ModifyActiveTrade) => {
   );
 };
 
+export const closeActiveTrade = async (tradeId: string) => {
+  await apiClient.post(`close-trade-endpoint/${tradeId}`, true);
+};
+
 export const fetchPendingOrders = async () => {
   const { data } = await apiClient.get("pending-orders-api");
   return data;

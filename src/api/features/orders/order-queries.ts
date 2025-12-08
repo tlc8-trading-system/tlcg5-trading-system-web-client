@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { cancelOrder, fetchPendingOrders, modifyActiveTrade, placeOrder } from "./order-api";
+import { cancelOrder, closeActiveTrade, fetchPendingOrders, modifyActiveTrade, placeOrder } from "./order-api";
 import { toast } from "sonner";
 import type { NavigateFunction } from "react-router-dom";
 import { queryKeys } from "../../query-keys";
@@ -48,6 +48,19 @@ export const ModifyActiveTrade = () => {
     mutationFn: modifyActiveTrade,
     onSuccess,
     onError: () => toast("Failed to modify your trade"),
+  });
+};
+
+export const CloseActiveTrade = () => {
+  const onSuccess = () => {
+    toast("Trade closed successfully");
+    queryClient.invalidateQueries({ queryKey: queryKeys.activeTrades });
+  };
+
+  return useMutation({
+    mutationFn: closeActiveTrade,
+    onSuccess,
+    onError: () => toast("Failed to close your trade"),
   });
 };
 

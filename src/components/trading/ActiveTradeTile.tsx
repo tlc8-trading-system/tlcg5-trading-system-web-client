@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import type { ActiveTrade } from "../../types";
 import { useState } from "react";
 import ModifyPosition from "../modals/ModifyPosition";
-import { ModifyActiveTrade } from "../../api/features/orders/order-queries";
+import { CloseActiveTrade, ModifyActiveTrade } from "../../api/features/orders/order-queries";
 
 interface ActiveTradeTileProps {
   trade: ActiveTrade;
@@ -19,10 +19,15 @@ const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
     takeProfit: trade.entryPrice.toString(),
   });
   const modifyActiveTrade = ModifyActiveTrade();
+  const closeActiveTrade = CloseActiveTrade();
 
   const saveTradeModification = () => {
     modifyActiveTrade.mutate(modifyTradeData);
   };
+
+  const closeTrade = () => {
+    closeActiveTrade.mutate(trade.id)
+  }
 
   return (
     <>
@@ -75,7 +80,7 @@ const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
               <Edit2 className="size-3 mr-1" />
               Modify
             </Button>
-            <Button size="sm" variant="outline" onClick={() => {}}>
+            <Button size="sm" variant="outline" onClick={closeTrade}>
               <X className="size-3 mr-1" />
               Close
             </Button>
