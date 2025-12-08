@@ -6,7 +6,7 @@ import { Login } from "./components/auth/Login";
 import { Register } from "./components/auth/Register";
 import { PlaceOrderPage } from "./components/pages/PlaceOrderPage";
 import { useAuth } from "./hooks/useAuth";
-import { PortfolioList } from "./components/portfolio/Portfolio";
+import { PortfolioPage } from "./components/pages/PortfolioPage";
 import { OrdersPage } from "./components/pages/OrdersPage";
 
 const DashboardPages = ({ children }: { children: React.ReactNode }) => {
@@ -58,6 +58,14 @@ function App() {
               </DashboardPages>
             }
           />
+          <Route
+            path="/trading/orders"
+            element={
+              <DashboardPages>
+                <OrdersPage />
+              </DashboardPages>
+            }
+          />
 
           <Route
           path="/portfolios"
@@ -65,7 +73,7 @@ function App() {
             <ProtectedRoute
               element={
             <DashboardPages>
-              <PortfolioList/>
+              <PortfolioPage/>
             </DashboardPages>
           }
             />
