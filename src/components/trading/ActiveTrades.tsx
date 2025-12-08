@@ -30,7 +30,7 @@ const ActiveTrades = () => {
             <thead className="w-full">
               <tr className="border-b border-border flex items-center justify-between">
                 <th className="text-left py-3 px-2">Symbol</th>
-                <th className="text-left py-3 px-2">Type</th>
+                <th className="text-left py-3 px-2">Position</th>
                 <th className="text-right py-3 px-2">Qty</th>
                 <th className="text-right py-3 px-2">Entry</th>
                 <th className="text-right py-3 px-2">Current</th>

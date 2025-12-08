@@ -58,6 +58,7 @@ export interface ActiveTrade {
   id: string;
   symbol: string;
   type: string;
+  position: string;
   quantity: number;
   entryPrice: number;
   currentPrice: number;

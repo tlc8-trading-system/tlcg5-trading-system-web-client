@@ -9,9 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
-import type { ModifyActiveTrade } from "../../types";
+import type { ActiveTrade, ModifyActiveTrade } from "../../types";
 
 interface ModifyPositionProps {
+  trade: ActiveTrade;
   showModifyDialog: boolean;
   setShowModifyDialog: (state: boolean) => void;
   modifyData: ModifyActiveTrade;
@@ -20,11 +21,12 @@ interface ModifyPositionProps {
 }
 
 const ModifyPosition: React.FC<ModifyPositionProps> = ({
+  trade,
   showModifyDialog,
   setShowModifyDialog,
   modifyData,
   setModifyData,
-  handleSaveModify
+  handleSaveModify,
 }) => {
   return (
     <Dialog open={showModifyDialog} onOpenChange={setShowModifyDialog}>
@@ -45,9 +47,15 @@ const ModifyPosition: React.FC<ModifyPositionProps> = ({
                 type="number"
                 step="0.01"
                 value={modifyData.stopLoss}
-                onChange={(e) =>
-                  setModifyData({ ...modifyData, stopLoss: e.target.value })
-                }
+                onChange={(e) => {
+                  const val = Number(e.target.value);
+                  if (
+                    (trade.type == "Buy" && val > trade.entryPrice) ||
+                    (trade.type === "Sell" && val < trade.entryPrice)
+                  )
+                    return;
+                  setModifyData({ ...modifyData, stopLoss: val.toString() });
+                }}
               />
             </div>
 
@@ -58,9 +66,15 @@ const ModifyPosition: React.FC<ModifyPositionProps> = ({
                 type="number"
                 step="0.01"
                 value={modifyData.takeProfit}
-                onChange={(e) =>
-                  setModifyData({ ...modifyData, takeProfit: e.target.value })
-                }
+                onChange={(e) => {
+                  const val = Number(e.target.value);
+                  if (
+                    (trade.type == "Sell" && val > trade.entryPrice) ||
+                    (trade.type == "Buy" && val < trade.entryPrice)
+                  )
+                    return;
+                  setModifyData({ ...modifyData, takeProfit: val.toString() });
+                }}
               />
             </div>
 
