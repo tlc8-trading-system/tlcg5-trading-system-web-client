@@ -13,3 +13,8 @@ export const fetchPendingOrders = async () => {
   const {data} = await apiClient.get("pending-orders-api");
   return data
 };
+
+export const fetchActiveTrades = async () => {
+  const {data} = await apiClient.get("active-trades-api");
+  return data
+};

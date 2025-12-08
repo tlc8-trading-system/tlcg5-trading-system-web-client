@@ -1,4 +1,5 @@
 export const queryKeys = {
     balance: ["balance"],
-    pendingOrders: ["pending-orders"]
+    pendingOrders: ["pending-orders"],
+    activeTrades: ["active-trades"]
 }
