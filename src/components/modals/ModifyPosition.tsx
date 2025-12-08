@@ -9,19 +9,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
-
-interface ModifyDialogData {
-  id: string;
-  symbol: string;
-  stopLoss: string;
-  takeProfit: string;
-}
+import type { ModifyActiveTrade } from "../../types";
 
 interface ModifyPositionProps {
   showModifyDialog: boolean;
   setShowModifyDialog: (state: boolean) => void;
-  modifyData: ModifyDialogData;
-  setModifyData: (state: ModifyDialogData) => void;
+  modifyData: ModifyActiveTrade;
+  setModifyData: (state: ModifyActiveTrade) => void;
   handleSaveModify: () => void;
 }
 
@@ -38,7 +32,7 @@ const ModifyPosition: React.FC<ModifyPositionProps> = ({
         <DialogHeader>
           <DialogTitle>Modify Position</DialogTitle>
           <DialogDescription>
-            Adjust stop loss and take profit for {modifyData?.symbol}
+            Adjust stop loss and take profit for your {modifyData?.symbol}
           </DialogDescription>
         </DialogHeader>
 
