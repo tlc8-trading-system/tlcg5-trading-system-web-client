@@ -52,9 +52,13 @@ function App() {
           <Route
             path="/trading/orders"
             element={
-              <DashboardPages>
-                <OrdersPage />
-              </DashboardPages>
+              <ProtectedRoute
+                element={
+                  <DashboardPages>
+                    <OrdersPage />
+                  </DashboardPages>
+                }
+              />
             }
           />
         </Routes>
