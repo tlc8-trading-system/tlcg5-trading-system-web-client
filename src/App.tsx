@@ -58,31 +58,7 @@ function App() {
               </DashboardPages>
             }
           />
-          <Route
-            path="/trading/orders"
-            element={
-              <DashboardPages>
-                <OrdersPage />
-              </DashboardPages>
-            }
-          />
-          <Route
-            path="/trading/orders"
-            element={
-              <DashboardPages>
-                <OrdersPage />
-              </DashboardPages>
-            }
-          />
-          <Route
-            path="/trading/orders"
-            element={
-              <DashboardPages>
-                <OrdersPage />
-              </DashboardPages>
-            }
-          />
-
+          
           <Route
           path="/portfolios"
           element={
