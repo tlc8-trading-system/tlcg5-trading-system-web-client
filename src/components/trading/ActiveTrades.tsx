@@ -51,7 +51,7 @@ const ActiveTrades = () => {
           </table>
         </div>
 
-        {(error ? mockActiveTrades : activeTrades).length === 0 && (
+        {!isLoading && (error ? mockActiveTrades : activeTrades).length === 0 && (
           <div className="text-center py-12 text-muted-foreground">
             No active trades
           </div>
