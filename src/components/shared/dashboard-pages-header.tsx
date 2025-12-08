@@ -9,7 +9,7 @@ const DashboardPagesHeader: React.FC<DashboardPagesHeaderProps> = ({
 }) => {
   return (
     <div className="text-left">
-      <h1>{pageTitle}</h1>
+      <h1 className="text-2xl font-bold">{pageTitle}</h1>
       <p className="text-muted-foreground mt-1">{pageDescription}</p>
     </div>
   );
