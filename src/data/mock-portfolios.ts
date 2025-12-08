@@ -1,0 +1,77 @@
+export const mockPortfolios = [
+  {
+    id: '1',
+    name: 'Growth Portfolio',
+    description: 'Long-term growth focused on tech stocks',
+    value: 125430.50,
+    profitLoss: 8234.25,
+    profitLossPercent: 7.02,
+    openPositions: 12,
+    lastUpdated: '2025-12-01T10:30:00',
+    assets: [
+      { symbol: 'AAPL', status: 'owned', quantity: 100 },
+      { symbol: 'GOOGL', status: 'owned', quantity: 50 },
+      { symbol: 'MSFT', status: 'watched', quantity: 0 },
+    ],
+  },
+  {
+    id: '2',
+    name: 'Conservative Portfolio',
+    description: 'Low-risk dividend stocks',
+    value: 87650.0,
+    profitLoss: -1234.5,
+    profitLossPercent: -1.39,
+    openPositions: 8,
+    lastUpdated: '2025-12-01T10:28:00',
+    assets: [
+      { symbol: 'JNJ', status: 'owned', quantity: 80 },
+      { symbol: 'PG', status: 'owned', quantity: 60 },
+    ],
+  },
+  {
+    id: '3',
+    name: 'Tech Focus',
+    description: 'High-growth tech companies',
+    value: 45200.75,
+    profitLoss: 3450.25,
+    profitLossPercent: 8.27,
+    openPositions: 5,
+    lastUpdated: '2025-12-01T10:25:00',
+    assets: [
+      { symbol: 'NVDA', status: 'owned', quantity: 30 },
+      { symbol: 'TSLA', status: 'watched', quantity: 0 },
+    ],
+  },
+
+  {
+    id: '4',
+    name: 'Income Fund',
+    description: 'Stable income through bonds and blue-chip dividends',
+    value: 69320.40,
+    profitLoss: 1420.10,
+    profitLossPercent: 2.09,
+    openPositions: 6,
+    lastUpdated: '2025-12-01T10:20:00',
+    assets: [
+      { symbol: 'T', status: 'owned', quantity: 120 },
+      { symbol: 'VZ', status: 'owned', quantity: 90 },
+      { symbol: 'BND', status: 'owned', quantity: 50 },
+    ],
+  },
+
+  {
+    id: '5',
+    name: 'Aggressive Growth',
+    description: 'High-risk, high-reward emerging tech and biotech companies',
+    value: 38210.80,
+    profitLoss: -2200.75,
+    profitLossPercent: -5.44,
+    openPositions: 7,
+    lastUpdated: '2025-12-01T10:15:00',
+    assets: [
+      { symbol: 'PLTR', status: 'owned', quantity: 200 },
+      { symbol: 'CRSP', status: 'owned', quantity: 40 },
+      { symbol: 'SPCE', status: 'watched', quantity: 0 },
+    ],
+  },
+];
