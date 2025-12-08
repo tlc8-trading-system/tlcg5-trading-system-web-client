@@ -6,7 +6,7 @@ import { Login } from "./components/auth/Login";
 import { Register } from "./components/auth/Register";
 import { PlaceOrderPage } from "./components/pages/PlaceOrderPage";
 import { useAuth } from "./hooks/useAuth";
-import { PortfolioPage } from "./components/pages/PortfolioPage";
+import { PortfolioPage } from "./components/pages/Portfolio/PortfolioPage";
 import { OrdersPage } from "./components/pages/OrdersPage";
 
 const DashboardPages = ({ children }: { children: React.ReactNode }) => {
@@ -49,6 +49,22 @@ function App() {
               }
             />
           }
+          />
+          <Route
+            path="/trading/orders"
+            element={
+              <DashboardPages>
+                <OrdersPage />
+              </DashboardPages>
+            }
+          />
+          <Route
+            path="/trading/orders"
+            element={
+              <DashboardPages>
+                <OrdersPage />
+              </DashboardPages>
+            }
           />
           <Route
             path="/trading/orders"
