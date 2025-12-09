@@ -5,13 +5,13 @@ import { Lock, Mail } from "lucide-react";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLoginUser } from "../../hooks/useLoginUser";
+import { LoginUser } from "../../api/features/authentication/auth-queries";
 
 export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const loginMutation = useLoginUser(navigate);
+    const loginMutation = LoginUser(navigate);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -74,6 +74,14 @@ export function Login() {
                                 {loginMutation.isPending ? "Signing In..." : "Sign In"}
                             </Button>
                         </div>
+
+                        <button
+                                type="button"
+                                onClick={() => navigate('/register')}
+                                className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                            Don't have an account? Register
+                        </button>
 
                     </form>
                 </CardContent>
