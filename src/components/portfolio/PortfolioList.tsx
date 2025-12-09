@@ -1,15 +1,24 @@
 import { useNavigate } from "react-router-dom";
-import { Activity, TrendingDown, TrendingUp } from "lucide-react";
-import { mockPortfolios } from "../../data/mock-portfolios";
+import { Activity, Loader2, TrendingDown, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { usePortfoliosQuery } from "../../api/features/portfolios/portfolio-queries";
 
 export function PortfolioList() {
 const navigate = useNavigate();
+const { data: portfolios, isLoading ,isError } = usePortfoliosQuery();
+
+if (isLoading) {
+    return <div className="flex justify-center p-8"><Loader2 className="animate-spin" /></div>;
+  }
+  
+if (isError) {
+    return <div className="text-red-500">Failed to load portfolios.</div>;
+  }
 
 return (
   <div className="space-y-8">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mockPortfolios.map((portfolio) => (
+        {portfolios?.map((portfolio) => (
             <Card
                 key={portfolio.id}
                 className="transition-shadow cursor-pointer"
