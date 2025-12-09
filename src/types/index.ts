@@ -33,9 +33,17 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface ApiResponse<T>{
+  data:T|null;
+  message: string;
+}
+
 export interface LoginResponse {
-  user: User;
-  accessToken: string; 
+    userId : string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    role: string;
 }
 
 export type OrderType = "Buy" | "Sell";
