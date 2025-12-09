@@ -1,4 +1,6 @@
-export const mockPortfolios = [
+import type { Portfolio } from "../types";
+
+export const mockPortfolios: Portfolio[] = [
   {
     id: '1',
     name: 'Growth Portfolio',
@@ -6,12 +8,12 @@ export const mockPortfolios = [
     value: 125430.50,
     profitLoss: 8234.25,
     profitLossPercent: 7.02,
-    openPositions: 12,
+    openPositions: 3,
     lastUpdated: '2025-12-01T10:30:00',
     assets: [
-      { symbol: 'AAPL', status: 'owned', quantity: 100 },
-      { symbol: 'GOOGL', status: 'owned', quantity: 50 },
-      { symbol: 'MSFT', status: 'watched', quantity: 0 },
+      { symbol: 'AAPL', name: 'Apple Inc.', price: 189.23, exchange: 'NASDAQ' },
+      { symbol: 'GOOGL', name: 'Alphabet Inc.', price: 134.55, exchange: 'NASDAQ' },
+      { symbol: 'MSFT', name: 'Microsoft Corp.', price: 335.10, exchange: 'NASDAQ' },
     ],
   },
   {
@@ -21,11 +23,11 @@ export const mockPortfolios = [
     value: 87650.0,
     profitLoss: -1234.5,
     profitLossPercent: -1.39,
-    openPositions: 8,
+    openPositions: 2,
     lastUpdated: '2025-12-01T10:28:00',
     assets: [
-      { symbol: 'JNJ', status: 'owned', quantity: 80 },
-      { symbol: 'PG', status: 'owned', quantity: 60 },
+      { symbol: 'JNJ', name: 'Johnson & Johnson', price: 165.80, exchange: 'NYSE' },
+      { symbol: 'PG', name: 'Procter & Gamble', price: 144.30, exchange: 'NYSE' },
     ],
   },
   {
@@ -35,14 +37,13 @@ export const mockPortfolios = [
     value: 45200.75,
     profitLoss: 3450.25,
     profitLossPercent: 8.27,
-    openPositions: 5,
+    openPositions: 2,
     lastUpdated: '2025-12-01T10:25:00',
     assets: [
-      { symbol: 'NVDA', status: 'owned', quantity: 30 },
-      { symbol: 'TSLA', status: 'watched', quantity: 0 },
+      { symbol: 'NVDA', name: 'NVIDIA Corp.', price: 305.20, exchange: 'NASDAQ' },
+      { symbol: 'TSLA', name: 'Tesla Inc.', price: 425.50, exchange: 'NASDAQ' },
     ],
   },
-
   {
     id: '4',
     name: 'Income Fund',
@@ -50,15 +51,14 @@ export const mockPortfolios = [
     value: 69320.40,
     profitLoss: 1420.10,
     profitLossPercent: 2.09,
-    openPositions: 6,
+    openPositions: 3,
     lastUpdated: '2025-12-01T10:20:00',
     assets: [
-      { symbol: 'T', status: 'owned', quantity: 120 },
-      { symbol: 'VZ', status: 'owned', quantity: 90 },
-      { symbol: 'BND', status: 'owned', quantity: 50 },
+      { symbol: 'T', name: 'AT&T Inc.', price: 18.50, exchange: 'NYSE' },
+      { symbol: 'VZ', name: 'Verizon Communications', price: 42.75, exchange: 'NYSE' },
+      { symbol: 'BND', name: 'Vanguard Total Bond Market', price: 85.10, exchange: 'NASDAQ' },
     ],
   },
-
   {
     id: '5',
     name: 'Aggressive Growth',
@@ -66,12 +66,12 @@ export const mockPortfolios = [
     value: 38210.80,
     profitLoss: -2200.75,
     profitLossPercent: -5.44,
-    openPositions: 7,
+    openPositions: 3,
     lastUpdated: '2025-12-01T10:15:00',
     assets: [
-      { symbol: 'PLTR', status: 'owned', quantity: 200 },
-      { symbol: 'CRSP', status: 'owned', quantity: 40 },
-      { symbol: 'SPCE', status: 'watched', quantity: 0 },
+      { symbol: 'PLTR', name: 'Palantir Technologies', price: 12.45, exchange: 'NYSE' },
+      { symbol: 'CRSP', name: 'CRISPR Therapeutics', price: 75.30, exchange: 'NASDAQ' },
+      { symbol: 'SPCE', name: 'Virgin Galactic', price: 8.90, exchange: 'NYSE' },
     ],
   },
 ];
