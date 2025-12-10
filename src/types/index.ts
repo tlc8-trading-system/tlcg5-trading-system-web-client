@@ -4,8 +4,8 @@ export interface User {
   createdAt: string;
   id: string;
   image:null;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   role: userRoles;
   updatedAt: string;
