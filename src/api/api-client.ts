@@ -4,7 +4,8 @@ const apiClient = axios.create({
     baseURL: import.meta.env.VITE_APP_SERVER_BASE_URL,
     headers: {
         "Content-Type": "application/json"
-    }
+    },
+    withCredentials: true,
 })
 
 export default apiClient;
