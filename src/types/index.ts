@@ -1,11 +1,14 @@
 export type userRoles = "admin" | "trader";
 
 export interface User {
+  createdAt: string;
   id: string;
+  image:null;
   firstName: string;
   lastName: string;
   email: string;
   role: userRoles;
+  updatedAt: string;
 }
 
 export interface RegisterRequest {
