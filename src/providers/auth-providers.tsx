@@ -1,54 +1,43 @@
-import { useEffect, useState } from "react";
 import type { User } from "../types";
 import AuthContext from "../contexts/auth-context";
-import { mockUser } from "../data/mock-data";
-import { toast } from "sonner";
+import { useCurrentUser } from "../api/features/user/user-queries"; 
+import { useQueryClient } from "@tanstack/react-query";
+import { logoutUser } from "../api/features/authentication/auth-apis";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
 
-  const getNewAccessToken = () => {
-    return "new-access-token";
+  const { 
+    data: user, 
+    isLoading: isQueryLoading, 
+    refetch, 
+  } = useCurrentUser(); 
+  
+  const queryClient = useQueryClient();
+
+  const isLoading = isQueryLoading;
+
+  
+  const login = async (user?: User): Promise<void> => {
+    queryClient.setQueryData(["me"], user ?? null);
   };
 
-  const login = (user: User, accessToken: string) => {
-    setUser(mockUser);
 
-    sessionStorage.setItem("user", JSON.stringify(user));
-    sessionStorage.setItem("access-token", accessToken);
+  const logout = async () => {
+    logoutUser();
+  
   };
-
-  const logout = () => {
-    setUser(null);
-    sessionStorage.clear();
-  };
-
-  useEffect(() => {
-    const fetchAlreadyLoggedInUser = () => {
-      const browserUser = sessionStorage.getItem("user");
-      let accessToken = sessionStorage.getItem("access-token");
-      if (browserUser && accessToken) {
-        setUser(JSON.parse(browserUser));
-      } else {
-        const newAccessToken = getNewAccessToken();
-        if (!newAccessToken) {
-          toast("You must log in again");
-          logout();
-        }
-        accessToken = newAccessToken;
-      }
-    };
-
-    fetchAlreadyLoggedInUser();
-  }, []);
 
   return (
     <AuthContext.Provider
       value={{
-        user,
+        user: user || null, 
         login,
         logout,
+        checkAuth: async () => {
+          await refetch();
+        },
         isAuthenticated: !!user,
+        isLoading,
       }}
     >
       {children}
