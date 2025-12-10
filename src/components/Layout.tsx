@@ -1,10 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import { TrendingUp, Menu, X, Activity } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const {user} = useAuth();
+
 
   const navigation = [
     { name: "Place Order", path: "/trading/place-order", icon: TrendingUp },
@@ -50,9 +53,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-2">
             <div className="hidden sm:flex items-center gap-3 ml-4 pl-4 border-l border-border">
               <div className="text-right">
-                <div className="text-sm">Samuella M. Aglago</div>
+                <div className="text-sm">{user?.firstname} {user?.lastname}</div>
                 <div className="text-xs text-muted-foreground capitalize">
-                  Trader
+                  {user?.role}
                 </div>
               </div>
             </div>
@@ -77,9 +80,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <nav className="px-4 py-4 space-y-1">
               <div className="pt-4 mt-4 border-b border-border">
                 <div className="px-3 py-2 text-right">
-                  <div className="text-sm">Samuella M. Aglago</div>
+                  <div className="text-sm">"{user?.firstname} {user?.lastname}</div>
                   <div className="text-xs text-muted-foreground capitalize">
-                    Trader
+                    {user?.role}
                   </div>
                 </div>
               </div>
