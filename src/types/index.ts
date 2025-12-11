@@ -3,7 +3,7 @@ export type userRoles = "admin" | "trader";
 export interface User {
   createdAt: string;
   id: string;
-  image:null;
+  image: null;
   firstname: string;
   lastname: string;
   email: string;
@@ -18,11 +18,11 @@ export interface RegisterRequest {
   lastname: string;
 }
 
-export interface Stock  {
-    ticker: string;
-    name: string;
-    price: number;
-    exchange: string
+export interface Stock {
+  ticker: string;
+  name: string;
+  price: number;
+  exchange: string;
 }
 export interface Asset {
   symbol: string;
@@ -36,19 +36,18 @@ export interface LoginRequest {
   password: string;
 }
 
-
 export interface LoginResponse {
-    userId : string;
-    firstname: string;
-    lastname: string;
-    email: string;
-    role: string;
+  userId: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  role: string;
 }
 
 export type OrderType = "Buy" | "Sell";
 export type OrderPosition = "Short" | "Long";
 export type OrderMode = "Market" | "Limit";
-export type OrderStatus = "Pending" | "Partial" | "Closed" | "Canceled"
+export type OrderStatus = "Pending" | "Partial" | "Closed" | "Canceled";
 
 export interface ActiveTrade {
   id: string;

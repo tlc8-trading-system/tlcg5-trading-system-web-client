@@ -4,8 +4,7 @@ import { useUserBalance } from "../../api/features/user-balance/balance-queries"
 
 const Balances = () => {
   const { data, isLoading, error } = useUserBalance();
-  console.log("balace: ", data?.data?.balance);
-
+  
   let balance = data?.data?.balance;
   if (error) balance = 0;
   return (
