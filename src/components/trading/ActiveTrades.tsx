@@ -9,8 +9,9 @@ const ActiveTrades = () => {
   const { data, isLoading, error } = useActiveTrades();
 
   let activeTrades: ServerActiveTrade[] = [];
-  if (data?.data) activeTrades = data.data;
-  if (error) activeTrades = []; // add mock
+  if (data?.data)
+    activeTrades = data.data.filter((order) => order.status === "FILLED");
+  if (error) activeTrades = [];
 
   return (
     <Card className="shadow-sm text-left">
@@ -51,11 +52,12 @@ const ActiveTrades = () => {
           </table>
         </div>
 
-        {!isLoading && (error ? mockActiveTrades : activeTrades).length === 0 && (
-          <div className="text-center py-12 text-muted-foreground">
-            No active trades
-          </div>
-        )}
+        {!isLoading &&
+          (error ? mockActiveTrades : activeTrades).length === 0 && (
+            <div className="text-center py-12 text-muted-foreground">
+              No active trades
+            </div>
+          )}
       </CardContent>
     </Card>
   );
