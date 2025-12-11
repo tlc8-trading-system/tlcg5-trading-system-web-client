@@ -85,6 +85,30 @@ export interface PendingOrder {
   timestamp: string;
 }
 
+export interface Holdings{
+    id: string,
+    symbol: string,
+    type: string,
+    quantity: number,
+    entryPrice: number,
+    currentPrice: number,
+    profitLoss: number,
+    profitLossPercent: number,
+    openDate: string,
+}
+
+export interface PortfolioDetails {
+  id: string;
+  title: string;
+  description: string;
+  value: number;
+  profitLoss: number;
+  profitLossPercent: number;
+  count: number;
+  lastUpdated: string;
+  holdings: Holdings[];
+}
+ 
 export interface Portfolio {
   id: string;
   title: string;
@@ -94,8 +118,7 @@ export interface Portfolio {
   profitLossPercent: number;
   count: number;
 }
- 
-export interface CreateNewPortfolio {
+ export interface CreateNewPortfolio {
   title: string;
   description: string;
 }
