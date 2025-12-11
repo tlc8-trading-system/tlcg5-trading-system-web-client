@@ -38,3 +38,13 @@ export interface ServerActiveTrade {
   price: number;
   status: string;
 }
+
+export interface ServerAsset {
+  BID_PRICE: number;
+  SELL_LIMIT: number;
+  TICKER: string;
+  MAX_PRICE_SHIFT: number;
+  LAST_TRADED_PRICE: number;
+  BUY_LIMIT: number;
+  ASK_PRICE: number;
+}

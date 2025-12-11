@@ -7,18 +7,28 @@ import { Separator } from "../ui/separator";
 import { Badge } from "../ui/badge";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { type OrderMode, type OrderType, type Asset } from "../../types";
+import { type OrderMode, type OrderType } from "../../types";
 import AssetList from "./AssetList";
-import { tradingAssets } from "../../data/mock-assets";
 import { PlaceOrder } from "../../api/features/pending-orders/pending-order-queries";
 import {
   getOrderSide,
   getOrderType,
   type PlaceOrderRequest,
+  type ServerAsset,
 } from "../../types/server";
 import { checkIfUserOwnsAsset } from "../../services/order-service";
 
-const OrderDetails = () => {
+interface OrderDetailsProps {
+  tradingAssets: ServerAsset[];
+  isLoading: boolean;
+  error: Error | null;
+}
+
+const OrderDetails: React.FC<OrderDetailsProps> = ({
+  tradingAssets,
+  isLoading,
+  error,
+}) => {
   const navigate = useNavigate();
   const [asset, setAsset] = useState("");
   const [orderType, setOrderType] = useState<OrderType>("Buy");
@@ -27,6 +37,7 @@ const OrderDetails = () => {
   const [orderMode, setOrderMode] = useState<OrderMode>("Market");
   const [showAssetList, setShowAssetList] = useState(false);
   const [assetSearch, setAssetSearch] = useState("");
+  const [tradelimit, setTradeLimit] = useState(0);
 
   const orderDescription =
     orderMode === "Market"
@@ -37,16 +48,29 @@ const OrderDetails = () => {
 
   const total = Number(quantity) * Number(price || 0);
 
-  const filteredAssets: Asset[] = tradingAssets.filter(
+  const filteredAssets: ServerAsset[] = tradingAssets.filter(
     (s) =>
-      s.symbol.toLowerCase().includes(assetSearch.toLowerCase()) ||
-      s.name.toLowerCase().includes(assetSearch.toLowerCase())
+      s.TICKER.toLowerCase().includes(assetSearch.toLowerCase()) ||
+      s.TICKER.toLowerCase().includes(assetSearch.toLowerCase())
   );
 
+  const reset = () => {
+    setQuantity("");
+    setPrice("");
+  };
+
   const handleAssetSelect = (selectedAsset: (typeof tradingAssets)[0]) => {
-    setAsset(selectedAsset.symbol);
-    setPrice(selectedAsset.price.toString());
+    setAsset(selectedAsset.TICKER);
+    setPrice(
+      orderType === "Buy"
+        ? selectedAsset.ASK_PRICE.toString()
+        : selectedAsset.BID_PRICE.toString()
+    );
     setAssetSearch("");
+    setTradeLimit(
+      orderType === "Buy" ? selectedAsset.BUY_LIMIT : selectedAsset.SELL_LIMIT
+    );
+    setQuantity(tradelimit.toString());
     setShowAssetList(false);
   };
 
@@ -78,7 +102,10 @@ const OrderDetails = () => {
                 <Button
                   type="button"
                   variant={orderType === "Buy" ? "default" : "outline"}
-                  onClick={() => setOrderType("Buy")}
+                  onClick={() => {
+                    reset();
+                    setOrderType("Buy");
+                  }}
                   className="h-11"
                 >
                   Buy
@@ -87,6 +114,7 @@ const OrderDetails = () => {
                   type="button"
                   variant={orderType === "Sell" ? "default" : "outline"}
                   onClick={() => {
+                    reset();
                     setOrderType("Sell");
                   }}
                   className="h-11"
@@ -103,7 +131,10 @@ const OrderDetails = () => {
                 <Button
                   type="button"
                   variant={orderMode === "Market" ? "default" : "outline"}
-                  onClick={() => setOrderMode("Market")}
+                  onClick={() => {
+                    reset()
+                    setOrderMode("Market");
+                  }}
                   className="h-11"
                 >
                   Market
@@ -111,7 +142,10 @@ const OrderDetails = () => {
                 <Button
                   type="button"
                   variant={orderMode === "Limit" ? "default" : "outline"}
-                  onClick={() => setOrderMode("Limit")}
+                  onClick={() => {
+                    reset()
+                    setOrderMode("Limit");
+                  }}
                   className="h-11"
                 >
                   Limit
@@ -139,20 +173,35 @@ const OrderDetails = () => {
                     }
                     setShowAssetList(true);
                   }}
-                  onFocus={() => setShowAssetList(true)}
+                  onFocus={() => setShowAssetList(true)} // TODO: on focus, refetch :)
                   className="pl-10"
                   autoComplete="off"
                   required
                 />
               </div>
 
-              {showAssetList && (assetSearch || !asset) && (
-                <AssetList
-                  filteredAssets={filteredAssets}
-                  handleStockSelect={handleAssetSelect}
-                  showAssetList={setShowAssetList}
-                />
-              )}
+              {showAssetList &&
+                (assetSearch || !asset) &&
+                (isLoading ? (
+                  <div className="absolute z-20 w-full mt-1 bg-card border border-border rounded-md shadow-lg max-h-64 overflow-y-auto min-h-32 flex items-center justify-center">
+                    Loading...
+                  </div>
+                ) : (
+                  <>
+                    {error && (
+                      <p className="text-sm text-destructive">
+                        Failed to fetch available trading assets, showing mock
+                        data
+                      </p>
+                    )}
+                    <AssetList
+                      orderType={orderType}
+                      filteredAssets={filteredAssets}
+                      handleStockSelect={handleAssetSelect}
+                      showAssetList={setShowAssetList}
+                    />
+                  </>
+                ))}
             </div>
 
             {/** Choose quantity and price */}
@@ -164,7 +213,11 @@ const OrderDetails = () => {
                   type="number"
                   placeholder="100"
                   value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
+                  onChange={(e) => {
+                    const val = Number(e.target.value);
+                    if (val > tradelimit) return;
+                    setQuantity(val.toString());
+                  }}
                   required
                 />
               </div>

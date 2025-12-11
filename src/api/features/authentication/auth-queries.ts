@@ -29,7 +29,7 @@ export const LoginUser = (navigate: NavigateFunction) => {
     },
 
     onError: (error) => {
-      toast.error("Unable to reach server.");
+      toast.error("Login failed");
       console.error(error);
     },
   });

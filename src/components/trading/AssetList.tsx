@@ -1,14 +1,17 @@
 import React from "react";
-import type { Asset } from "../../types";
 import { useEffect, useRef } from "react";
+import type { ServerAsset } from "../../types/server";
+import type { OrderType } from "../../types";
 
 interface AssetListProps {
-  filteredAssets: Asset[];
-  handleStockSelect: (asset: Asset) => void;
+  orderType: OrderType;
+  filteredAssets: ServerAsset[];
+  handleStockSelect: (asset: ServerAsset) => void;
   showAssetList: (state: boolean) => void;
 }
 
 const AssetList: React.FC<AssetListProps> = ({
+  orderType,
   filteredAssets,
   handleStockSelect,
   showAssetList,
@@ -38,22 +41,23 @@ const AssetList: React.FC<AssetListProps> = ({
       {filteredAssets.length > 0 ? (
         filteredAssets.map((s) => (
           <button
-            key={s.symbol}
+            key={s.TICKER}
             type="button"
             onClick={() => handleStockSelect(s)}
             className="w-full px-4 py-3 text-left hover:bg-muted transition-colors border-b border-border last:border-0"
           >
             <div className="flex items-center justify-between">
               <div>
-                <div className="flex items-center gap-2">
-                  <span>{s.symbol}</span>
-                  <span className="text-xs text-muted-foreground">
-                    {s.exchange}
-                  </span>
+                <div>
+                  <span>{s.TICKER}</span>
                 </div>
-                <div className="text-sm text-muted-foreground">{s.name}</div>
               </div>
-              <div className="text-sm">${s.price.toFixed(2)}</div>
+              <div className="text-sm">
+                $
+                {orderType === "Buy"
+                  ? s.ASK_PRICE.toFixed(2)
+                  : s.BID_PRICE.toFixed(2)}{" "}
+              </div>{" "}
             </div>
           </button>
         ))
