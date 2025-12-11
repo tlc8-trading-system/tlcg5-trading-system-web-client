@@ -7,9 +7,8 @@ import { Separator } from "../ui/separator";
 import { Badge } from "../ui/badge";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { type OrderMode, type OrderType } from "../../types";
+import { type OrderMode, type OrderType, type Portfolio } from "../../types";
 import AssetList from "./AssetList";
-import { PlaceOrder } from "../../api/features/pending-orders/pending-order-queries";
 import {
   getOrderSide,
   getOrderType,
@@ -17,14 +16,24 @@ import {
   type ServerAsset,
 } from "../../types/server";
 import { checkIfUserOwnsAsset } from "../../services/order-service";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { usePlaceOrder } from "../../api/features/pending-orders/pending-order-queries";
 
 interface OrderDetailsProps {
+  portfolios: Portfolio[];
   tradingAssets: ServerAsset[];
   isLoading: boolean;
   error: Error | null;
 }
 
 const OrderDetails: React.FC<OrderDetailsProps> = ({
+  portfolios,
   tradingAssets,
   isLoading,
   error,
@@ -38,13 +47,14 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
   const [showAssetList, setShowAssetList] = useState(false);
   const [assetSearch, setAssetSearch] = useState("");
   const [tradelimit, setTradeLimit] = useState(0);
+  const [selectedPortfolio, setSelectedPortfolio] = useState("");
 
   const orderDescription =
     orderMode === "Market"
       ? `${orderType} ${quantity} ${asset} at market price`
       : `${orderType} ${quantity} ${asset} @ $${price} (limit)`;
 
-  const placeOrder = PlaceOrder(orderDescription, navigate);
+  const placeOrder = usePlaceOrder(orderDescription, navigate);
 
   const total = Number(quantity) * Number(price || 0);
 
@@ -79,9 +89,11 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
 
     const newOrder: PlaceOrderRequest = {
       product: asset,
-      quantity,
       side: getOrderSide(orderType),
       type: getOrderType(orderMode),
+      quantity: +quantity,
+      price: +price,
+      portfolioId: selectedPortfolio,
     };
 
     placeOrder.mutate(newOrder);
@@ -132,7 +144,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
                   type="button"
                   variant={orderMode === "Market" ? "default" : "outline"}
                   onClick={() => {
-                    reset()
+                    reset();
                     setOrderMode("Market");
                   }}
                   className="h-11"
@@ -143,7 +155,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
                   type="button"
                   variant={orderMode === "Limit" ? "default" : "outline"}
                   onClick={() => {
-                    reset()
+                    reset();
                     setOrderMode("Limit");
                   }}
                   className="h-11"
@@ -238,6 +250,29 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
                 />
               </div>
             </div>
+          </div>
+
+          <Separator />
+
+          {/** Choose portfolio trade should belong */}
+          <div className="space-y-2">
+            <Label htmlFor="portfolio">Portfolio</Label>
+            <Select
+              value={selectedPortfolio}
+              onValueChange={setSelectedPortfolio}
+              defaultValue={portfolios[0]?.title}
+            >
+              <SelectTrigger id="portfolio" className="w-full">
+                <SelectValue placeholder="Select portfolio..." />
+              </SelectTrigger>
+              <SelectContent className="w-full">
+                {portfolios.map((portfolio) => (
+                  <SelectItem key={portfolio.id} value={portfolio.id}>
+                    {portfolio.title}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           <Separator />

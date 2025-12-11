@@ -20,4 +20,10 @@ export const endpoints = {
   assetEndpoints: {
     allAssets: baseUrl + "/api/marketdata/assets/" + exchange1,
   },
+  portfolioEndpoints: {
+    myPortfolios: baseUrl + "/api/client/portfolio"
+  },
+  orderEndpoints: {
+    placeOrder: baseUrl + "/api/order"
+  },
 };

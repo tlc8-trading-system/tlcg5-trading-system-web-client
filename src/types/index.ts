@@ -81,13 +81,9 @@ export interface PendingOrder {
 
 export interface Portfolio {
   id: string;
-  name: string;
+  title: string;
   description: string;
-  value: number;
-  profitLoss: number;
-  profitLossPercent: number;
-  openPositions: number;
-  lastUpdated: string;
-  assets: Asset[];
+  createAt: string;
+  closedAt: string;
+  active: boolean;
 }
-

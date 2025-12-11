@@ -7,10 +7,11 @@ export interface ServerResponse<T> {
 
 export interface PlaceOrderRequest {
   product: string;
-  quantity: string;
-  price?: string;
-  side: "BUY" | "SELL";
-  type: "MARKET" | "LIMIT";
+  side: string;
+  type: string;
+  quantity: number;
+  price: number;
+  portfolioId: string;
 }
 
 export const getOrderSide = (orderType: OrderType) => {
