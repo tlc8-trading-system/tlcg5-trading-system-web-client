@@ -9,10 +9,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
-import type { ActiveTrade, ModifyActiveTrade } from "../../types";
+import type { ModifyActiveTrade } from "../../types";
+import type { ServerActiveTrade } from "../../types/server";
 
 interface ModifyTradeProps {
-  trade: ActiveTrade;
+  trade: ServerActiveTrade;
   showModifyDialog: boolean;
   setShowModifyDialog: (state: boolean) => void;
   modifyData: ModifyActiveTrade;
@@ -42,7 +43,7 @@ const ModifyTrade: React.FC<ModifyTradeProps> = ({
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label htmlFor="symbol">Asset</Label>
-              <Input id="symbol" type="text" value={trade.symbol} disabled />
+              <Input id="symbol" type="text" value={trade.product} disabled />
             </div>
             <div className="flex items-center justify-between gap-4">
               <div className="space-y-2">
@@ -61,7 +62,7 @@ const ModifyTrade: React.FC<ModifyTradeProps> = ({
                 <Input
                   id="entryPrice"
                   type="number"
-                  value={trade.entryPrice}
+                  value={trade.price}
                   disabled
                 />
               </div>
@@ -78,8 +79,8 @@ const ModifyTrade: React.FC<ModifyTradeProps> = ({
                   onChange={(e) => {
                     const val = Number(e.target.value);
                     if (
-                      (trade.type == "Buy" && val > trade.entryPrice) ||
-                      (trade.type === "Sell" && val < trade.entryPrice)
+                      (trade.type == "Buy" && val > trade.price) ||
+                      (trade.type === "Sell" && val < trade.price)
                     )
                       return;
                     setModifyData({ ...modifyData, stopLoss: val.toString() });
@@ -97,8 +98,8 @@ const ModifyTrade: React.FC<ModifyTradeProps> = ({
                   onChange={(e) => {
                     const val = Number(e.target.value);
                     if (
-                      (trade.type == "Sell" && val > trade.entryPrice) ||
-                      (trade.type == "Buy" && val < trade.entryPrice)
+                      (trade.type == "Sell" && val > trade.price) ||
+                      (trade.type == "Buy" && val < trade.price)
                     )
                       return;
                     setModifyData({

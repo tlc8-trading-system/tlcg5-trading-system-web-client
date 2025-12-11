@@ -7,8 +7,10 @@ export const endpoints = {
         logout: baseUrl + "/api/auth/logout"
 
     },
-
     userEndpoints: {
         me: baseUrl + "/api/user/me"
+    },
+    tradeEndpoints: {
+        allTrades: baseUrl + "/api/order/open"
     }
 }

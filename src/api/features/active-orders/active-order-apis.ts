@@ -1,5 +1,6 @@
 import type { ModifyActiveTrade } from "../../../types";
 import apiClient from "../../api-client";
+import { endpoints } from "../../api-endpoints";
 
 export const modifyActiveTrade = async (newTradeData: ModifyActiveTrade) => {
   await apiClient.patch(
@@ -13,6 +14,6 @@ export const closeActiveTrade = async (tradeId: string) => {
 };
 
 export const fetchActiveTrades = async () => {
-  const { data } = await apiClient.get("active-trades-api");
+  const { data } = await apiClient.get(endpoints.tradeEndpoints.allTrades);
   return data;
 };

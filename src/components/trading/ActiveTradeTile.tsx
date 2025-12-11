@@ -1,22 +1,26 @@
 import { Badge } from "../ui/badge";
 import { Edit2, TrendingDown, TrendingUp, X } from "lucide-react";
 import { Button } from "../ui/button";
-import type { ActiveTrade } from "../../types";
 import { useState } from "react";
-import { CloseActiveTrade, ModifyActiveTrade } from "../../api/features/active-orders/active-order-queries";
+import {
+  CloseActiveTrade,
+  ModifyActiveTrade,
+} from "../../api/features/active-orders/active-order-queries";
 import ModifyTrade from "../modals/ModifyTrade";
+import type { ServerActiveTrade } from "../../types/server";
+import { profitLoss, profitLossPercent } from "../../services/order-service";
 
 interface ActiveTradeTileProps {
-  trade: ActiveTrade;
+  trade: ServerActiveTrade;
 }
 
 const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
   const [modifyTrade, setModifyTrade] = useState(false);
   const [modifyTradeData, setModifyTradeData] = useState({
     id: trade.id,
-    symbol: trade.symbol,
-    stopLoss: trade.entryPrice.toString(),
-    takeProfit: trade.entryPrice.toString(),
+    symbol: trade.product,
+    stopLoss: trade.price.toString(),
+    takeProfit: trade.price.toString(),
   });
   const modifyActiveTrade = ModifyActiveTrade();
   const closeActiveTrade = CloseActiveTrade();
@@ -26,8 +30,8 @@ const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
   };
 
   const closeTrade = () => {
-    closeActiveTrade.mutate(trade.id)
-  }
+    closeActiveTrade.mutate(trade.id);
+  };
 
   return (
     <>
@@ -35,36 +39,34 @@ const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
         key={trade.id}
         className="w-full flex items-center justify-between border-b border-border hover:bg-muted/30 transition-colors text-left"
       >
-        <td className="py-4 px-2">{trade.symbol}</td>
+        <td className="py-4 px-2">{trade.product}</td>
         <td className="py-4 px-2">
-          <Badge variant={trade.position === "Long" ? "default" : "secondary"}>
-            {trade.position}
+          <Badge variant={trade.type === "Long" ? "default" : "secondary"}>
+            {trade.type}
           </Badge>
         </td>
         <td className="text-right py-4 px-2">{trade.quantity}</td>
-        <td className="text-right py-4 px-2">${trade.entryPrice.toFixed(2)}</td>
-        <td className="text-right py-4 px-2">
-          ${trade.currentPrice.toFixed(2)}
-        </td>
+        <td className="text-right py-4 px-2">${trade.price.toFixed(2)}</td>
+        <td className="text-right py-4 px-2">${trade.price.toFixed(2)}</td>
         <td className="text-right py-4 px-2">
           <div className="flex items-center justify-end gap-1">
-            {trade.profitLoss >= 0 ? (
+            {profitLoss() >= 0 ? (
               <TrendingUp className="size-3 text-green-500" />
             ) : (
               <TrendingDown className="size-3 text-red-500" />
             )}
             <span
               className={
-                trade.profitLoss >= 0
+                profitLoss() >= 0
                   ? "text-green-600 dark:text-green-500"
                   : "text-red-600 dark:text-red-500"
               }
             >
-              ${Math.abs(trade.profitLoss).toFixed(2)}
+              ${Math.abs(profitLoss()).toFixed(2)}
             </span>
             <span className="text-xs text-muted-foreground ml-1">
-              ({trade.profitLossPercent >= 0 ? "+" : ""}
-              {trade.profitLossPercent}%)
+              ({profitLossPercent() >= 0 ? "+" : ""}
+              {profitLossPercent()}%)
             </span>
           </div>
         </td>

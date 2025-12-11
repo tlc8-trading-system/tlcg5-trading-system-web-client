@@ -2,10 +2,8 @@ import { toast } from "sonner";
 import queryClient from "../../query-client";
 import { queryKeys } from "../../query-keys";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { closeActiveTrade, modifyActiveTrade } from "./active-order-apis";
-import type { ServerResponse } from "../../../types/server";
-import type { ActiveTrade } from "../../../types";
-import { fetchPendingOrders } from "../pending-orders/pending-order-api";
+import { closeActiveTrade, fetchActiveTrades, modifyActiveTrade } from "./active-order-apis";
+import type { ServerActiveTrade, ServerResponse } from "../../../types/server";
 
 export const ModifyActiveTrade = () => {
   const onSuccess = () => {
@@ -34,8 +32,8 @@ export const CloseActiveTrade = () => {
 };
 
 export const useActiveTrades = () => {
-  return useQuery<ServerResponse<ActiveTrade>>({
+  return useQuery<ServerResponse<ServerActiveTrade>>({
     queryKey: queryKeys.activeTrades,
-    queryFn: fetchPendingOrders,
+    queryFn: fetchActiveTrades,
   });
 };

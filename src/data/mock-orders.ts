@@ -1,41 +1,42 @@
 export const mockActiveTrades = [
   {
     id: "TRD-001",
-    symbol: "TSLA",
-    position: "Long",
-    type: "Buy",
+    product: "TSLA",
+    type: "Long",
+    side: "Buy",
     quantity: 50,
-    entryPrice: 245.5,
-    currentPrice: 252.3,
-    profitLoss: 340.0,
-    profitLossPercent: 2.77,
-    openDate: "2025-11-28",
+    price: 252.3,
+    status: "open",
   },
   {
     id: "TRD-002",
-    symbol: "NVDA",
-    position: "Long",
-    type: "Buy",
+    product: "NVDA",
+    type: "Long",
+    side: "Buy",
     quantity: 100,
-    entryPrice: 495.75,
-    currentPrice: 498.2,
-    profitLoss: 245.0,
-    profitLossPercent: 0.49,
-    openDate: "2025-11-30",
+    price: 498.2,
+    status: "open",
   },
   {
     id: "TRD-003",
-    symbol: "AMZN",
-    position: "Short",
-    type: "Sell",
+    product: "AMZN",
+    type: "Short",
+    side: "Sell",
     quantity: 30,
-    entryPrice: 152.8,
-    currentPrice: 151.2,
-    profitLoss: 48.0,
-    profitLossPercent: 1.05,
-    openDate: "2025-11-29",
+    price: 151.2,
+    status: "open",
   },
 ];
+
+export interface ServerActiveTrade {
+  id: string;
+  product: string;
+  side: string;
+  type: string;
+  quantity: number;
+  price: number;
+  status: string;
+}
 
 export const mockPendingOrders = [
   {
