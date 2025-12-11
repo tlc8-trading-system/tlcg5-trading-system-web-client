@@ -1,11 +1,13 @@
-import { useQuery, type UseQueryResult } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import type { User } from "../../../types";
-import { getUser } from "./user-apis"; 
+import { getUser } from "./user-apis";
 
 
-export const useCurrentUser = (): UseQueryResult<User, Error> => {
-  return useQuery<User, Error>({
-    queryKey: ["me"], 
-    queryFn: getUser, 
+export const useCurrentUser = () => {
+  return useQuery<User>({
+    queryKey: ["me"],
+    queryFn: getUser,
   });
 };
+
+
