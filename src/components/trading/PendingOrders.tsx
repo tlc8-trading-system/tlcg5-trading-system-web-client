@@ -8,7 +8,7 @@ const PendingOrders = () => {
   const { data, isLoading, error } = usePendingOrders();
 
   let pendingOrders: PendingOrder[] = [];
-  if (data?.data) pendingOrders = data.data;
+  if (data?.data) pendingOrders = data.data.filter((order) => order.status === "PENDING");
   if (error) pendingOrders = [];
 
   return (
