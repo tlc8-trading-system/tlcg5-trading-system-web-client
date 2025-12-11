@@ -11,6 +11,7 @@ import { PortfolioPage } from "./components/pages/Portfolio/PortfolioPage";
 import { TradeHistoryPage } from "./components/pages/TradingHistoryPage";
 import { CreatePortfolioPage } from "./components/pages/Portfolio/CreatePortfolioPage";
 import TradesPage from "./components/pages/admin/TradesPage";
+import { PortfolioDetailsPage } from "./components/pages/Portfolio/PortfolioDetailsPage";
 
 const DashboardPages = ({ children }: { children: React.ReactNode }) => {
   return <Layout>{children}</Layout>;
@@ -77,6 +78,12 @@ function App() {
                 </DashboardPages>
               }
             />
+            <Route path="/portfolio/details/:id"
+                  element={
+                  <DashboardPages>
+                    <PortfolioDetailsPage/>
+                  </DashboardPages>}/>
+
           </Route>
         </Routes>
         <Toaster position="top-center" />
