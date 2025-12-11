@@ -8,10 +8,11 @@ import type { ServerActiveTrade as PendingOrder } from "../../../types/server";
 
 import queryClient from "../../query-client";
 
-export const PlaceOrder = (
+export const usePlaceOrder = (
   orderDescription: string,
   navigate: NavigateFunction
 ) => {
+  
   const onSuccess = () => {
     toast(orderDescription);
     setTimeout(() => {

@@ -3,7 +3,9 @@ import apiClient from "../../api-client";
 import { endpoints } from "../../api-endpoints";
 
 export const placeOrder = async (orderDetails: PlaceOrderRequest) => {
-  await apiClient.post("place-order-endpoint", orderDetails);
+  console.log("order: ", orderDetails);
+  
+  await apiClient.post(endpoints.orderEndpoints.placeOrder, orderDetails);
 };
 
 export const cancelOrder = async (orderId: string) => {
