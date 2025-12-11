@@ -46,7 +46,7 @@ const ActiveTrades = () => {
                 </div>
               )}
               {activeTrades.map((trade) => (
-                <ActiveTradeTile trade={trade} />
+                <ActiveTradeTile trade={trade} key={trade.id} />
               ))}
             </tbody>
           </table>

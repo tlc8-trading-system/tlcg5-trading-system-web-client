@@ -7,7 +7,7 @@ export const placeOrder = async (orderDetails: PlaceOrderRequest) => {
 };
 
 export const cancelOrder = async (orderId: string) => {
-  await apiClient.delete(`cancel-order-endpoint/${orderId}`);
+  await apiClient.delete(endpoints.orderEndpoints.allPendingOrders + "/" + orderId);
 };
 
 export const fetchPendingOrders = async () => {

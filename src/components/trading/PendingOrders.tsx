@@ -34,7 +34,7 @@ const PendingOrders = () => {
         ) : (
           <div className="space-y-3">
             {pendingOrders.map((order) => (
-              <PendingOrderTile order={order} />
+              <PendingOrderTile order={order} key={order.id} />
             ))}
             {pendingOrders.length === 0 && (
               <div className="text-center py-12 text-muted-foreground">
