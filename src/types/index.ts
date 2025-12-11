@@ -36,10 +36,6 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface ApiResponse<T>{
-  data:T|null;
-  message: string;
-}
 
 export interface LoginResponse {
     userId : string;

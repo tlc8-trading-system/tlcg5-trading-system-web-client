@@ -2,7 +2,7 @@ import type { OrderMode, OrderType } from ".";
 
 export interface ServerResponse<T> {
   message: string;
-  data: T[];
+  data: T | null;
 }
 
 export interface PlaceOrderRequest {
