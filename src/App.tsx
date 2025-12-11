@@ -69,6 +69,15 @@ function App() {
                 </DashboardPages>
               }
             />
+
+            <Route path="/portfolios/create"
+                  element={
+                    <DashboardPages>
+                      <CreatePortfolioPage />
+                    </DashboardPages>
+                  }
+            />
+
           </Route>
         </Routes>
         <Toaster position="top-center" />
