@@ -22,10 +22,11 @@ return (
             <Card
                 key={portfolio.id}
                 className="transition-shadow cursor-pointer"
-                onClick={() => navigate(`/portfolio/detail/${portfolio.id}`)}>
+                onClick={() => navigate(`/portfolio/details/${portfolio.id}`)}>
 
                 <CardHeader>
                     <CardTitle className="flex items-center justify-between">
+                        <span>{portfolio.title}</span>
                         <span>{portfolio.title}</span>
                         <Activity className="size-4 text-muted-foreground" />
                     </CardTitle>
@@ -56,6 +57,9 @@ return (
                     </div>
 
                     <div className="pt-4 border-t border-border flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">
+                            {portfolio.count} open positions
+                        </span>
                     </div>
                 </CardContent>
 
