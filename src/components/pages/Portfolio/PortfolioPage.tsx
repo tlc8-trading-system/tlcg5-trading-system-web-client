@@ -16,7 +16,7 @@ export function PortfolioPage() {
         pageDescription="Manage your investment portfolios"
       />
 
-      <Button onClick={() => navigate('/portfolio/create')} className="h-10">
+      <Button onClick={() => navigate('/portfolios/create')} className="h-10">
             <Plus className="size-4 mr-2" />
             Create Portfolio
         </Button>      
