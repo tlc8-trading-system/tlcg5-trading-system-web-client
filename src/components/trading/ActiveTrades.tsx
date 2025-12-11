@@ -1,16 +1,16 @@
 import { mockActiveTrades } from "../../data/mock-orders";
-import type { ActiveTrade } from "../../types";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import ActiveTradeTile from "./ActiveTradeTile";
 import { Spinner } from "../ui/spinner";
 import { useActiveTrades } from "../../api/features/active-orders/active-order-queries";
+import type { ServerActiveTrade } from "../../types/server";
 
 const ActiveTrades = () => {
   const { data, isLoading, error } = useActiveTrades();
 
-  let activeTrades: ActiveTrade[] = [];
+  let activeTrades: ServerActiveTrade[] = [];
   if (data?.data) activeTrades = data.data;
-  if (error) activeTrades = mockActiveTrades;
+  if (error) activeTrades = []; // add mock
 
   return (
     <Card className="shadow-sm text-left">

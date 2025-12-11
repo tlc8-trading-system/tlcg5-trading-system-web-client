@@ -28,3 +28,13 @@ export const getOrderType = (orderMode: OrderMode) => {
     return "MARKET";
   }
 };
+
+export interface ServerActiveTrade {
+  id: string;
+  product: string;
+  side: string;
+  type: string;
+  quantity: number;
+  price: number;
+  status: string;
+}
