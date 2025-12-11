@@ -43,5 +43,6 @@ export const usePendingOrders = () => {
   return useQuery<ServerResponse<PendingOrder>>({
     queryKey: queryKeys.pendingOrders,
     queryFn: fetchPendingOrders,
+    refetchInterval: 1000,
   });
 };
