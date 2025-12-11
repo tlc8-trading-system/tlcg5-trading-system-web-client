@@ -4,10 +4,10 @@ import { useUserBalance } from "../../api/features/user-balance/balance-queries"
 
 const Balances = () => {
   const { data, isLoading, error } = useUserBalance();
-  console.log("balace: ", data?.data);
-  
-  let balance = data?.data;
-  if(error) balance = 0
+  console.log("balace: ", data?.data?.balance);
+
+  let balance = data?.data?.balance;
+  if (error) balance = 0;
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <Card className="shadow-sm">
@@ -19,10 +19,14 @@ const Balances = () => {
             $
             {isLoading
               ? "..."
-              : JSON.stringify(data?.data) == undefined
+              : JSON.stringify(balance) == undefined
               ? balance
-              : JSON.stringify(data?.data)}
-              {error && <p className="text-sm text-destructive">Failed to fetch user balance</p>}
+              : (+JSON.stringify(balance)).toFixed(2)}
+            {error && (
+              <p className="text-sm text-destructive">
+                Failed to fetch user balance
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>
