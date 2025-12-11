@@ -10,7 +10,6 @@ import { Textarea } from '../ui/textarea';
 export function CreatePortfolio() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [initialCapital, setInitialCapital] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -50,22 +49,6 @@ export function CreatePortfolio() {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="capital">Initial Capital</Label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
-                  <Input
-                    id="capital"
-                    type="number"
-                    step="0.01"
-                    placeholder="10000.00"
-                    value={initialCapital}
-                    onChange={(e) => setInitialCapital(e.target.value)}
-                    className="pl-7"
-                    required
-                  />
-                </div>
-              </div>
             </div>
 
             <div className="flex gap-3 pt-4">
