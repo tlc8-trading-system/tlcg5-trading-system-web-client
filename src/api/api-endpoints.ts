@@ -12,5 +12,8 @@ export const endpoints = {
     },
     tradeEndpoints: {
         allTrades: baseUrl + "/api/order/open"
+    },
+    orderEndpoints: {
+        allPendingOrders: baseUrl + "/api/order"
     }
 }
