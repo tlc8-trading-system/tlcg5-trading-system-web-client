@@ -1,4 +1,4 @@
-export type userRoles = "admin" | "trader";
+export type userRoles = "ADMIN" | "USER";
 
 export interface User {
   createdAt: string;
