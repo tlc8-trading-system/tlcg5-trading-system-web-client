@@ -47,17 +47,17 @@ if (isError) {
                       {trade.product}
                     </td>
                     <td className='py-4 px-2'>
-                      <Badge variant={trade.side === 'Long' ? 'default' : 'secondary'}>
-                      {trade.type}
+                      <Badge variant={trade.side === 'SELL' ? 'default' : 'secondary'}>
+                      {trade.side}
                     </Badge>
                     </td>
-                    <td className="py-4 px-2">
-                      <Badge variant={trade.type === 'Long' ? 'default' : 'secondary'}>
+                    <td className="text-left py-4 px-2">
+                      <Badge variant={trade.type === 'MARKET' ? 'default' : 'secondary'}>
                         {trade.type}
                       </Badge>
                     </td>
-                    <td className="text-right py-4 px-2">{trade.quantity}</td>
-                    <td className="text-right py-4 px-2">${trade.price.toFixed(2)}</td>
+                    <td className="text-left py-4 px-2">{trade.quantity}</td>
+                    <td className="text-left py-4 px-2">${trade.price.toFixed(2)}</td>
                     <td className="py-4 px-2">
                       <Badge variant="outline">{trade.status}</Badge>
                     </td>
