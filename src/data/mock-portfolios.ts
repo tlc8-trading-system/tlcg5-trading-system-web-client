@@ -13,7 +13,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
     holdings: [
       {
         id: "1-AAPL",
-        portfolioId: "1",
         asset: "AAPL",
         quantity: 50,
         averagePrice: 150,
@@ -23,7 +22,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
       },
       {
         id: "1-GOOGL",
-        portfolioId: "1",
         asset: "GOOGL",
         quantity: 20,
         averagePrice: 120,
@@ -33,7 +31,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
       },
       {
         id: "1-MSFT",
-        portfolioId: "1",
         asset: "MSFT",
         quantity: 15,
         averagePrice: 300,
@@ -56,7 +53,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
     holdings: [
       {
         id: "2-JNJ",
-        portfolioId: "2",
         asset: "JNJ",
         quantity: 40,
         averagePrice: 170,
@@ -66,7 +62,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
       },
       {
         id: "2-PG",
-        portfolioId: "2",
         asset: "PG",
         quantity: 25,
         averagePrice: 150,
@@ -89,7 +84,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
     holdings: [
       {
         id: "3-NVDA",
-        portfolioId: "3",
         asset: "NVDA",
         quantity: 10,
         averagePrice: 270,
@@ -99,7 +93,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
       },
       {
         id: "3-TSLA",
-        portfolioId: "3",
         asset: "TSLA",
         quantity: 8,
         averagePrice: 380,
@@ -122,7 +115,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
     holdings: [
       {
         id: "4-T",
-        portfolioId: "4",
         asset: "T",
         quantity: 100,
         averagePrice: 17,
@@ -132,7 +124,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
       },
       {
         id: "4-VZ",
-        portfolioId: "4",
         asset: "VZ",
         quantity: 60,
         averagePrice: 40,
@@ -142,7 +133,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
       },
       {
         id: "4-BND",
-        portfolioId: "4",
         asset: "BND",
         quantity: 30,
         averagePrice: 80,
@@ -165,7 +155,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
     holdings: [
       {
         id: "5-PLTR",
-        portfolioId: "5",
         asset: "PLTR",
         quantity: 100,
         averagePrice: 15,
@@ -175,7 +164,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
       },
       {
         id: "5-CRSP",
-        portfolioId: "5",
         asset: "CRSP",
         quantity: 20,
         averagePrice: 90,
@@ -185,7 +173,6 @@ export const mockPortfolioDetails: PortfolioDetails[] = [
       },
       {
         id: "5-SPCE",
-        portfolioId: "5",
         asset: "SPCE",
         quantity: 200,
         averagePrice: 12,
