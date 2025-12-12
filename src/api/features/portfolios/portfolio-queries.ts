@@ -1,13 +1,13 @@
 import { useMutation, useQuery} from "@tanstack/react-query";
 import { queryKeys } from "../../query-keys"; 
 import { createPortfolio, fetchPortfolioDetails, fetchPortfolios} from "./portfolio-apis"; 
-import type { ApiResponse, Portfolio,PortfolioDetails } from "../../../types";
+import type { Portfolio,PortfolioDetails } from "../../../types";
+import type { ServerResponse } from "../../../types/server";
 import { toast } from "sonner";
-import { useQuery } from "@tanstack/react-query";
 
 
 export const usePortfoliosQuery = () => {
-    return useQuery<ApiResponse<Portfolio[]>>({
+    return useQuery<ServerResponse<Portfolio[]>>({
         queryKey: queryKeys.portfolios,
         queryFn: fetchPortfolios,
         staleTime: 1000 * 60 * 5, 
@@ -27,10 +27,10 @@ export const CreatePortfolio =  () => {
     })
 }
 
-export const usePortfolioDetailsQuery = () => {
-    return useQuery<ApiResponse< PortfolioDetails[]>>({
+export const usePortfolioDetailsQuery = (id?:string) => {
+    return useQuery<ServerResponse< PortfolioDetails|undefined>>({
         queryKey: queryKeys.portfolioDetails,
-        queryFn: fetchPortfolioDetails,
+        queryFn: () => fetchPortfolioDetails(id),
         staleTime: 1000 * 60 * 5, 
     });
 };
