@@ -13,7 +13,7 @@ export const endpoints = {
   },
   tradeEndpoints: {
     allTrades: baseUrl + "/api/order/open",
-        tradeHistory: baseUrl + "/api/order/history",
+    tradeHistory: baseUrl + "/api/order/history",
   },
   orderEndpoints: {
     allPendingOrders: baseUrl + "/api/order",
