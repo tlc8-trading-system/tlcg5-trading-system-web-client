@@ -20,7 +20,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
    const adminNavigation = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Trades', path: '/admin/trades', icon: DollarSign },
-    { name: 'Customers', path: '/admin/customers', icon: Users },
+    { name: 'Clients', path: '/admin/clients', icon: Users },
     { name: 'Exchanges', path: '/admin/exchanges', icon: Settings },
   ];
 

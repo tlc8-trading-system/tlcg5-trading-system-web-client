@@ -13,6 +13,7 @@ import { CreatePortfolioPage } from "./components/pages/Portfolio/CreatePortfoli
 import TradesPage from "./components/pages/admin/TradesPage";
 import { PortfolioDetailsPage } from "./components/pages/Portfolio/PortfolioDetailsPage";
 import { ExchangeConfig } from "./components/pages/admin/ExchangeConfig";
+import ClientsList from "./components/pages/admin/ClientsPage";
 
 const DashboardPages = ({ children }: { children: React.ReactNode }) => {
   return <Layout>{children}</Layout>;
@@ -79,19 +80,32 @@ function App() {
                 </DashboardPages>
               }
             />
-            <Route path="/portfolio/details/:id"
-                  element={
-                  <DashboardPages>
-                    <PortfolioDetailsPage/>
-                  </DashboardPages>}/>
+            <Route
+              path="/portfolio/details/:id"
+              element={
+                <DashboardPages>
+                  <PortfolioDetailsPage />
+                </DashboardPages>
+              }
+            />
 
-            <Route path="/admin/exchanges"
+            <Route
+              path="/admin/exchanges"
               element={
                 <DashboardPages>
                   <ExchangeConfig />
-                </DashboardPages>}
+                </DashboardPages>
+              }
             />
 
+            <Route
+              path="/admin/clients"
+              element={
+                <DashboardPages>
+                  <ClientsList />
+                </DashboardPages>
+              }
+            />
           </Route>
         </Routes>
         <Toaster position="top-center" />
