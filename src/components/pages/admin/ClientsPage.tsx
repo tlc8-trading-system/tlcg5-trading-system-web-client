@@ -1,0 +1,101 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
+import { Badge } from '../../ui/badge';
+import { Input } from '../../ui/input';
+import { Search, TrendingUp, TrendingDown } from 'lucide-react';
+import { mockClients } from '../../../data/mock-clients';
+import DashboardPagesHeader from '../../shared/dashboard-pages-header';
+
+export default function ClientsList() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const filteredCustomers = mockClients.filter(customer =>
+    customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    customer.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="space-y-8">
+      <DashboardPagesHeader pageTitle='Clients' pageDescription='Manage customer accounts' />
+
+      <Card className="shadow-sm">
+        <CardHeader>
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+            <CardTitle>All Customers ({filteredCustomers.length})</CardTitle>
+            <div className="relative w-full sm:w-auto">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+              <Input
+                placeholder="Search customers..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 w-full sm:w-[300px]"
+              />
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="text-left py-3 px-2">Customer</th>
+                  <th className="text-left py-3 px-2">Role</th>
+                  <th className="text-right py-3 px-2">Total Value</th>
+                  <th className="text-right py-3 px-2">P/L</th>
+                  <th className="text-center py-3 px-2">Portfolios</th>
+                  <th className="text-center py-3 px-2">Active Trades</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredCustomers.map((customer) => (
+                  <tr 
+                    key={customer.id} 
+                    className="border-b border-border hover:bg-muted/30 transition-colors cursor-pointer"
+                    onClick={() => navigate(`/admin/customers/${customer.id}`)}
+                  >
+                    <td className="py-4 px-2">
+                      <div>
+                        <div>{customer.name}</div>
+                        <div className="text-sm text-muted-foreground">{customer.email}</div>
+                      </div>
+                    </td>
+                    <td className="py-4 px-2">
+                      <Badge variant="outline" className="capitalize">
+                        {customer.role}
+                      </Badge>
+                    </td>
+                    <td className="text-right py-4 px-2">
+                      ${customer.totalValue.toLocaleString()}
+                    </td>
+                    <td className="text-right py-4 px-2">
+                      <div className="flex items-center justify-end gap-1">
+                        {+customer.pnl >= 0 ? (
+                          <TrendingUp className="size-3 text-green-500" />
+                        ) : (
+                          <TrendingDown className="size-3 text-red-500" />
+                        )}
+                        <span className={+customer.pnl >= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}>
+                          {+customer.pnl >= 0 ? '+' : ''}${Math.abs(+customer.pnl).toLocaleString()}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="text-center py-4 px-2">{customer.portfolios}</td>
+                    <td className="text-center py-4 px-2">{customer.activeTrades}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {filteredCustomers.length === 0 && (
+            <div className="text-center py-12 text-muted-foreground">
+              No customers found matching your search
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
