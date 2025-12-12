@@ -4,8 +4,14 @@ import { endpoints } from "../../api-endpoints";
 
 
 
-export const fetchPortfolioDetails = async () => {
-  const {data} =  await apiClient.get(endpoints.portfolioEndpoints.fetchPortfolioDetails);
+export const fetchPortfolios = async () => {
+  const {data} =  await apiClient.get(endpoints.portfolioEndpoints.fetchPortfolio);
+  return data;
+};
+
+export const fetchPortfolioDetails = async (id?:string) => {
+  console.log(endpoints.portfolioEndpoints.fetchPortfolioDetails  + id)
+  const {data} =  await apiClient.get(endpoints.portfolioEndpoints.fetchPortfolioDetails + id);
   return data;
 };
 export const createPortfolio = async (newPortfolio:CreateNewPortfolio ) => {
