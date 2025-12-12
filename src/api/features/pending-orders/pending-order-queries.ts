@@ -16,7 +16,7 @@ export const usePlaceOrder = (
   const onSuccess = () => {
     toast(orderDescription);
     setTimeout(() => {
-      navigate("/trading/orders");
+      navigate("/trading/orders"); // TODO: to the pending orders section
     }, 1000);
   };
 
