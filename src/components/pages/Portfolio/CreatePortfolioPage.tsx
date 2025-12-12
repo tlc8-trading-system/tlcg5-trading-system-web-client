@@ -1,5 +1,5 @@
 import DashboardPagesHeader from "../../shared/dashboard-pages-header";
-import { CreatePortfolio } from "../../portfolio/CreatePortfolio";
+import { CreateAPortfolio } from "../../portfolio/CreatePortfolio";
 
 
 export function CreatePortfolioPage() {
@@ -10,7 +10,7 @@ export function CreatePortfolioPage() {
         pageTitle="Create Portfolio"
         pageDescription="Set up a new investment portfolio"
         />
-        <CreatePortfolio/>
+        <CreateAPortfolio/>
     </div>
 
   );
