@@ -88,4 +88,8 @@ export interface Portfolio {
   profitLossPercent: number;
   count: number;
 }
- 
+
+export interface CreateNewPortfolio {
+  title: string;
+  description: string;
+}
