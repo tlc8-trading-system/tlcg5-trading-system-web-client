@@ -83,7 +83,9 @@ export interface Portfolio {
   id: string;
   title: string;
   description: string;
-  createAt: string;
-  closedAt: string;
-  active: boolean;
+  value: number;
+  profitLoss: number;
+  profitLossPercent: number;
+  count: number;
 }
+ 
