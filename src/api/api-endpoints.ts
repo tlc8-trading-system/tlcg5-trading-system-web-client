@@ -26,7 +26,7 @@ export const endpoints = {
   portfolioEndpoints: {
     myPortfolios: baseUrl + "/api/client/portfolio",
     createPortfolio: baseUrl + "/api/client/portfolio",
-    fetchPortfolioDetails: baseUrl + "/api/client/portfolio",
-    fetchPortfolio: baseUrl + "/api/client/{:id}"
+    fetchPortfolio: baseUrl + "/api/client/portfolio",
+    fetchPortfolioDetails: baseUrl + "/api/client/portfolio/"
   }
 };
