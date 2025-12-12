@@ -10,6 +10,7 @@ import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { PortfolioPage } from "./components/pages/Portfolio/PortfolioPage";
 import { TradeHistoryPage } from "./components/pages/TradingHistoryPage";
 import { CreatePortfolioPage } from "./components/pages/Portfolio/CreatePortfolioPage";
+import TradesPage from "./components/pages/admin/TradesPage";
 
 const DashboardPages = ({ children }: { children: React.ReactNode }) => {
   return <Layout>{children}</Layout>;
@@ -44,23 +45,14 @@ function App() {
                 </DashboardPages>
               }
             />
-
-            <Route path="/trading/history"
-                  element={
-                    <DashboardPages>
-                      <TradeHistoryPage />
-                    </DashboardPages>
-                  }
+            <Route
+              path="/trading/history"
+              element={
+                <DashboardPages>
+                  <TradeHistoryPage />
+                </DashboardPages>
+              }
             />
-
-            <Route path="/trading/history"
-                  element={
-                    <DashboardPages>
-                      <TradeHistoryPage />
-                    </DashboardPages>
-                  }
-            />
-
             <Route
               path="/portfolios"
               element={
@@ -69,15 +61,22 @@ function App() {
                 </DashboardPages>
               }
             />
-
-            <Route path="/portfolios/create"
-                  element={
-                    <DashboardPages>
-                      <CreatePortfolioPage />
-                    </DashboardPages>
-                  }
+            <Route
+              path="/portfolios/create"
+              element={
+                <DashboardPages>
+                  <CreatePortfolioPage />
+                </DashboardPages>
+              }
             />
-
+            <Route
+              path="/admin/trades"
+              element={
+                <DashboardPages>
+                  <TradesPage />
+                </DashboardPages>
+              }
+            />
           </Route>
         </Routes>
         <Toaster position="top-center" />
