@@ -1,4 +1,3 @@
-import type { User } from "../../../types";
 import apiClient from "../../api-client"
 import { endpoints } from "../../api-endpoints";
 

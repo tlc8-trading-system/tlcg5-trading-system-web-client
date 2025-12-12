@@ -26,7 +26,7 @@ return (
 
                 <CardHeader>
                     <CardTitle className="flex items-center justify-between">
-                        <span>{portfolio.name}</span>
+                        <span>{portfolio.title}</span>
                         <Activity className="size-4 text-muted-foreground" />
                     </CardTitle>
                 </CardHeader>
@@ -55,14 +55,6 @@ return (
                         </div>
                     </div>
 
-                    <div className="pt-4 border-t border-border flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">
-                            {portfolio.openPositions} open positions
-                        </span>
-                        <span className="text-xs text-muted-foreground">
-                            Updated {new Date(portfolio.lastUpdated).toLocaleString()}
-                        </span>
-                    </div>
                 </CardContent>
 
 
