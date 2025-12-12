@@ -4,5 +4,6 @@ export const queryKeys = {
     activeTrades: ["active-trades"],
     portfolios: ["portfolios"],
     assets: ["assets"],
-    clients: ["clients"]
+    clients: ["clients"],
+    client: ["client"],
 }

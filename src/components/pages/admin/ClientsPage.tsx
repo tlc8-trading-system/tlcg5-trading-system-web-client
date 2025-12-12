@@ -66,7 +66,7 @@ export default function ClientsList() {
                       key={customer.id}
                       className="border-b border-border hover:bg-muted/30 transition-colors cursor-pointer"
                       onClick={() =>
-                        navigate(`/admin/customers/${customer.id}`)
+                        navigate(`/admin/clients/${customer.id}`)
                       }
                     >
                       <td className="py-4 px-2">

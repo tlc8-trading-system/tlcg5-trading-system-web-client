@@ -4,8 +4,12 @@ import { usePendingOrders } from "../../api/features/pending-orders/pending-orde
 import type { ServerActiveTrade as PendingOrder } from "../../types/server";
 import { Spinner } from "../ui/spinner";
 
-const PendingOrders = () => {
-  const { data, isLoading, error } = usePendingOrders();
+interface PendingOrdersProps {
+  clientId?: string
+}
+
+const PendingOrders:React.FC<PendingOrdersProps> = ({clientId}) => {
+  const { data, isLoading, error } = usePendingOrders(clientId);
 
   let pendingOrders: PendingOrder[] = [];
   if (data?.data)
