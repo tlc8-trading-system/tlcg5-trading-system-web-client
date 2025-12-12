@@ -2,7 +2,7 @@ import { mockPortfolios } from "../../../data/mock-portfolios";
 import type { CreateNewPortfolio, Portfolio } from "../../../types";
 import apiClient from "../../api-client";
 import { endpoints } from "../../api-endpoints";
-let dbPortfolios = [...mockPortfolios]; 
+const dbPortfolios = [...mockPortfolios]; 
 
 
 export const fetchPortfolios = async (): Promise<Portfolio[]> => {
