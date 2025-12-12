@@ -16,6 +16,7 @@ export const endpoints = {
     tradeHistory: baseUrl + "/api/order/history",
   },
   orderEndpoints: {
+    allOrders: baseUrl + "/api/admin/orders",
     allPendingOrders: baseUrl + "/api/order",
     placeOrder: baseUrl + "/api/order"
   },
