@@ -121,3 +121,13 @@ export interface Exchange {
   baseUrl: string;
   enabled: boolean;
 }
+export interface Client {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  totalValue: number;
+  pnl: string;
+  portfolios: number;
+  activeTrades: number;
+}
