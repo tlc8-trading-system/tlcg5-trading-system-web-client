@@ -47,7 +47,13 @@ export interface LoginResponse {
 export type OrderType = "Buy" | "Sell";
 export type OrderPosition = "Short" | "Long";
 export type OrderMode = "Market" | "Limit";
-export type OrderStatus = "Pending" | "Partial" | "Closed" | "Canceled";
+export type OrderStatus =
+  | "PENDING"
+  | "SENT"
+  | "PARTIALLY_FILLED"
+  | "FILLED"
+  | "CANCELLED"
+  | "REJECTED";
 
 export interface ActiveTrade {
   id: string;
