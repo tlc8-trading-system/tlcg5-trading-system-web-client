@@ -9,6 +9,7 @@ import { OrdersPage } from "./components/pages/OrdersPage";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { PortfolioPage } from "./components/pages/Portfolio/PortfolioPage";
 import TradesPage from "./components/pages/admin/TradesPage";
+import ClientsList from "./components/pages/admin/ClientsPage";
 
 const DashboardPages = ({ children }: { children: React.ReactNode }) => {
   return <Layout>{children}</Layout>;
@@ -56,6 +57,14 @@ function App() {
               element={
                 <DashboardPages>
                   <TradesPage />
+                </DashboardPages>
+              }
+            />
+            <Route
+              path="/admin/clients"
+              element={
+                <DashboardPages>
+                  <ClientsList />
                 </DashboardPages>
               }
             />
