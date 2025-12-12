@@ -2,9 +2,7 @@ import type { PlaceOrderRequest } from "../../../types/server";
 import apiClient from "../../api-client";
 import { endpoints } from "../../api-endpoints";
 
-export const placeOrder = async (orderDetails: PlaceOrderRequest) => {
-  console.log("order: ", orderDetails);
-  
+export const placeOrder = async (orderDetails: PlaceOrderRequest) => {  
   await apiClient.post(endpoints.orderEndpoints.placeOrder, orderDetails);
 };
 
