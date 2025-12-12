@@ -87,7 +87,6 @@ export interface PendingOrder {
 
 export interface Holdings{
     id: string,
-    portfolioId: string,
     asset: string,
     quantity: number,
     currentPrice: number,
