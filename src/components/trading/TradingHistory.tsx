@@ -35,7 +35,7 @@ if (isError) {
                   <th className="text-left py-3 px-2">Product</th>
                   <th className="text-left py-3 px-2">Side</th>
                   <th className="text-left py-3 px-2">Type</th>
-                  <th className="text-right py-3 px-2">Qty</th>
+                  <th className="text-left py-3 px-2">Qty</th>
                   <th className="text-left py-3 px-2">Price</th>
                   <th className="text-left py-3 px-2">Status</th>
                 </tr>
