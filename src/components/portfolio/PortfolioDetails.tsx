@@ -1,10 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Badge } from '../ui/badge';
 import { mockPortfolioDetails } from '../../data/mock-portfolios';
 import { TrendingUp, TrendingDown, DollarSign, Activity, AlertCircle } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { performanceData } from '../../data/mock-performance';
 import DashboardPagesHeader from '../shared/dashboard-pages-header';
 
 export function PortfolioDetails() {
@@ -83,48 +80,7 @@ export function PortfolioDetails() {
         </Card>
       </div>
 
-      {/* Performance Chart*/}
-      <Card className="shadow-sm">
-        <CardHeader>
-          <CardTitle>Performance History</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={performanceData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis
-                  dataKey="date"
-                  stroke="hsl(var(--muted-foreground))"
-                  fontSize={12}
-                />
-                <YAxis
-                  stroke="hsl(var(--muted-foreground))"
-                  fontSize={12}
-                  tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'hsl(var(--card))',
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: '0.5rem'
-                  }}
-                  formatter={(value: any) => [`$${value.toLocaleString()}`, 'Value']}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="value"
-                  stroke="hsl(var(--primary))"
-                  strokeWidth={2}
-                  dot={false}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </CardContent>
-      </Card>
 
-      {/* Holdings*/}
       <Card className="shadow-sm">
         <CardHeader>
           <CardTitle>Current Holdings</CardTitle>
@@ -135,25 +91,16 @@ export function PortfolioDetails() {
               <thead>
                 <tr className="border-b border-border">
                   <th className="text-left py-3 px-2">Symbol</th>
-                  <th className="text-left py-3 px-2">Type</th>
                   <th className="text-right py-3 px-2">Qty</th>
-                  <th className="text-right py-3 px-2">Entry</th>
-                  <th className="text-right py-3 px-2">Current</th>
-                  <th className="text-right py-3 px-2">P/L</th>
-                  <th className="text-left py-3 px-2">Open Date</th>
+                  <th className="text-right py-3 px-2">Avg Entry</th>
+                  <th className="text-right py-3 px-2">Profit</th>
                 </tr>
               </thead>
               <tbody>
                 {holdings.map((holding) => (
                   <tr key={holding.id} className="border-b border-border hover:bg-muted/30 transition-colors">
-                    <td className="py-4 px-2">{holding.symbol}</td>
-                    <td className="py-4 px-2">
-                      <Badge variant={holding.type === 'equity' ? 'default' : 'secondary'}>
-                        {holding.type.charAt(0).toUpperCase() + holding.type.slice(1)}
-                      </Badge>
-                    </td>
+                    <td className="py-4 px-2">{holding.asset}</td>
                     <td className="text-right py-4 px-2">{holding.quantity}</td>
-                    <td className="text-right py-4 px-2">${holding.entryPrice.toFixed(2)}</td>
                     <td className="text-right py-4 px-2">${holding.currentPrice.toFixed(2)}</td>
                     <td className="text-right py-4 px-2">
                       <div className="flex items-center justify-end gap-1">
@@ -165,10 +112,9 @@ export function PortfolioDetails() {
                         <span className={holding.profitLoss >= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}>
                           ${Math.abs(holding.profitLoss).toFixed(2)}
                         </span>
+                        <span className='text-xs text-muted-foreground mt-1' >
+                          {holding.profitLossPercent >= 0 ? '+' : ''}{holding.profitLossPercent.toFixed(2)}%</span>
                       </div>
-                    </td>
-                    <td className="py-4 px-2 text-sm text-muted-foreground">
-                      {new Date(holding.openDate).toLocaleDateString()}
                     </td>
                   </tr>
                 ))}
