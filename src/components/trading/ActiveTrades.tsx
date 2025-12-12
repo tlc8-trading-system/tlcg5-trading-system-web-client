@@ -45,7 +45,7 @@ const ActiveTrades = () => {
                   <Spinner />
                 </div>
               )}
-              {activeTrades.map((trade) => (
+              {mockActiveTrades.map((trade) => (
                 <ActiveTradeTile trade={trade} key={trade.id} />
               ))}
             </tbody>

@@ -3,8 +3,8 @@ import apiClient from "../../api-client";
 import { endpoints } from "../../api-endpoints";
 
 export const modifyActiveTrade = async (newTradeData: ModifyActiveTrade) => {
-  await apiClient.patch(
-    `modify-trade-endpoint/${newTradeData.id}`,
+  await apiClient.put(
+    endpoints.orderEndpoints.allPendingOrders + newTradeData.id,
     newTradeData
   );
 };

@@ -70,9 +70,8 @@ export interface ActiveTrade {
 
 export interface ModifyActiveTrade {
   id: string;
-  symbol: string;
-  stopLoss: string;
-  takeProfit: string;
+  quantity: number;
+  price?: number;
 }
 
 export interface PendingOrder {
