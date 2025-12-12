@@ -16,14 +16,12 @@ export const endpoints = {
   },
   orderEndpoints: {
     allPendingOrders: baseUrl + "/api/order",
+    placeOrder: baseUrl + "/api/order"
   },
   assetEndpoints: {
     allAssets: baseUrl + "/api/marketdata/assets/" + exchange1,
   },
   portfolioEndpoints: {
     myPortfolios: baseUrl + "/api/client/portfolio"
-  },
-  orderEndpoints: {
-    placeOrder: baseUrl + "/api/order"
-  },
+  }
 };
