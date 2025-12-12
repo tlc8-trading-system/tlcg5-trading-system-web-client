@@ -1,12 +1,23 @@
 import { useParams } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { mockPortfolioDetails } from '../../data/mock-portfolios';
-import { TrendingUp, TrendingDown, DollarSign, Activity, AlertCircle } from 'lucide-react';
+import { TrendingUp, TrendingDown, DollarSign, Activity, AlertCircle, Loader2 } from 'lucide-react';
 import DashboardPagesHeader from '../shared/dashboard-pages-header';
+import { usePortfolioDetailsQuery } from '../../api/features/portfolios/portfolio-queries';
 
 export function PortfolioDetails() {
   const { id } = useParams<{ id: string }>();
-  const portfolio = mockPortfolioDetails.find(p => p.id === id);
+  const { data, isLoading, isError } = usePortfolioDetailsQuery(id);
+
+  if (isLoading) {
+    return <div className="flex justify-center p-8"><Loader2 className="animate-spin" /></div>;
+  }
+
+  if (isError) {
+    return <div className="text-red-500">Failed to load portfolios details.</div>;
+  }
+
+
+  const portfolio = data?.data
 
   if (!portfolio) {
     return (
@@ -22,8 +33,9 @@ export function PortfolioDetails() {
     pageDescription={portfolio.description}
   />
 
+  const holdings = portfolio?.holdings;
 
-  const { holdings } = portfolio;
+
 
 
   return (
@@ -36,7 +48,7 @@ export function PortfolioDetails() {
             <DollarSign className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl">${portfolio.value.toLocaleString()}</div>
+            <div className="text-2xl">${portfolio?.value?.toLocaleString()}</div>
           </CardContent>
         </Card>
 
@@ -51,10 +63,10 @@ export function PortfolioDetails() {
           </CardHeader>
           <CardContent>
             <div className={`text-2xl ${portfolio.profitLoss >= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
-              {portfolio.profitLoss >= 0 ? '+' : ''}${portfolio.profitLoss.toLocaleString()}
+              {portfolio.profitLoss >= 0 ? '+' : ''}${portfolio?.profitLoss?.toLocaleString()}
             </div>
             <p className="text-xs text-muted-foreground mt-1">
-              {portfolio.profitLossPercent >= 0 ? '+' : ''}{portfolio.profitLossPercent}% return
+              {portfolio.profitLossPercent >= 0 ? '+' : ''}{portfolio?.profitLossPercent}% return
             </p>
           </CardContent>
         </Card>
@@ -65,7 +77,7 @@ export function PortfolioDetails() {
             <Activity className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl">{portfolio.count}</div>
+            <div className="text-2xl">{portfolio?.count}</div>
           </CardContent>
         </Card>
 
@@ -97,7 +109,7 @@ export function PortfolioDetails() {
                 </tr>
               </thead>
               <tbody>
-                {holdings.map((holding) => (
+                {holdings?.map((holding) => (
                   <tr key={holding.id} className="border-b border-border hover:bg-muted/30 transition-colors">
                     <td className="py-4 px-2">{holding.asset}</td>
                     <td className="text-right py-4 px-2">{holding.quantity}</td>
@@ -109,18 +121,18 @@ export function PortfolioDetails() {
                         ) : (
                           <TrendingDown className="size-3 text-red-500" />
                         )}
-                        <span className={holding.profitLoss >= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}>
-                          ${Math.abs(holding.profitLoss).toFixed(2)}
+                        <span className={holding?.profitLoss >= 0 ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}>
+                          ${Math.abs(holding?.profitLoss)?.toFixed(2)}
                         </span>
                         <span className='text-xs text-muted-foreground mt-1' >
-                          {holding.profitLossPercent >= 0 ? '+' : ''}{holding.profitLossPercent.toFixed(2)}%</span>
+                          {holding?.profitLossPercent >= 0 ? '+' : ''}{holding?.profitLossPercent?.toFixed(2)}%</span>
                       </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            {holdings.length === 0 && (
+            {holdings?.length === 0 && (
               <div className="text-center py-8 text-muted-foreground">
                 This portfolio has no current holdings.
               </div>
