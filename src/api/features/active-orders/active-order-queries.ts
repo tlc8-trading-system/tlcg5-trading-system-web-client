@@ -31,10 +31,10 @@ export const CloseActiveTrade = () => {
   });
 };
 
-export const useActiveTrades = () => {
+export const useActiveTrades = (clientId?: string) => {
   return useQuery<ServerResponse<ServerActiveTrade[]>>({
     queryKey: queryKeys.activeTrades,
-    queryFn: fetchActiveTrades,
+    queryFn: () => fetchActiveTrades(clientId && clientId),
     refetchInterval: 1000
   });
 };

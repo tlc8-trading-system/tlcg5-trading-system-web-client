@@ -5,8 +5,12 @@ import { Spinner } from "../ui/spinner";
 import { useActiveTrades } from "../../api/features/active-orders/active-order-queries";
 import type { ServerActiveTrade } from "../../types/server";
 
-const ActiveTrades = () => {
-  const { data, isLoading, error } = useActiveTrades();
+interface ActiveTradeProps {
+  clientId?: string
+}
+
+const ActiveTrades:React.FC<ActiveTradeProps> = ({clientId}) => {  
+  const { data, isLoading, error } = useActiveTrades(clientId);
 
   let activeTrades: ServerActiveTrade[] = [];
   if (data?.data)

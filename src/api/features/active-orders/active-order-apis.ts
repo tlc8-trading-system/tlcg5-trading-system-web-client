@@ -13,7 +13,11 @@ export const closeActiveTrade = async (tradeId: string) => {
   await apiClient.post(`close-trade-endpoint/${tradeId}`, true);
 };
 
-export const fetchActiveTrades = async () => {
-  const { data } = await apiClient.get(endpoints.tradeEndpoints.allTrades);
+export const fetchActiveTrades = async (clientId?: string) => {
+  const { data } = await apiClient.get(
+    clientId
+      ? endpoints.adminEndpoints.clientTrades + clientId + "/orders"
+      : endpoints.tradeEndpoints.allTrades
+  );
   return data;
 };

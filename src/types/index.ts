@@ -131,3 +131,14 @@ export interface Client {
   portfolios: number;
   activeTrades: number;
 }
+
+export interface ClientDetail {
+  email: string;
+  firstname: string;
+  id: string;
+  image?: string;
+  lastname: string;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
+}
