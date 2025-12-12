@@ -1,4 +1,4 @@
-export type userRoles = "admin" | "trader";
+export type userRoles = "ADMIN" | "USER";
 
 export interface User {
   createdAt: string;
@@ -47,7 +47,13 @@ export interface LoginResponse {
 export type OrderType = "Buy" | "Sell";
 export type OrderPosition = "Short" | "Long";
 export type OrderMode = "Market" | "Limit";
-export type OrderStatus = "Pending" | "Partial" | "Closed" | "Canceled";
+export type OrderStatus =
+  | "PENDING"
+  | "SENT"
+  | "PARTIALLY_FILLED"
+  | "FILLED"
+  | "CANCELLED"
+  | "REJECTED";
 
 export interface ActiveTrade {
   id: string;
@@ -86,4 +92,38 @@ export interface Portfolio {
   createAt: string;
   closedAt: string;
   active: boolean;
+}
+
+export interface OutdatedPortfolio {
+  id: string;
+  name: string;
+  description: string;
+  value: number;
+  profitLoss: number;
+  profitLossPercent: number;
+  openPositions: number;
+  lastUpdated: string;
+  assets: { symbol: string; name: string; price: number; exchange: string }[];
+}
+
+export interface Client {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  totalValue: number;
+  pnl: string;
+  portfolios: number;
+  activeTrades: number;
+}
+
+export interface ClientDetail {
+  email: string;
+  firstname: string;
+  id: string;
+  image?: string;
+  lastname: string;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
 }

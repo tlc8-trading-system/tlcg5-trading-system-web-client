@@ -1,9 +1,9 @@
-import { mockPortfolios } from "../../../data/mock-portfolios";
-import type { Portfolio } from "../../../types";
-let dbPortfolios = [...mockPortfolios]; 
+import { mockOutdatedPortfolios } from "../../../data/mock-portfolios";
+import type { OutdatedPortfolio } from "../../../types";
+const dbPortfolios = [...mockOutdatedPortfolios]; 
 
 
-export const fetchPortfolios = async (): Promise<Portfolio[]> => {
+export const fetchPortfolios = async (): Promise<OutdatedPortfolio[]> => {
   return dbPortfolios;
 };
 

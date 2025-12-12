@@ -40,10 +40,10 @@ export const CancelOrder = () => {
   });
 };
 
-export const usePendingOrders = () => {
+export const usePendingOrders = (clientId?: string) => {
   return useQuery<ServerResponse<PendingOrder[]>>({
     queryKey: queryKeys.pendingOrders,
-    queryFn: fetchPendingOrders,
+    queryFn:() => fetchPendingOrders(clientId && clientId),
     refetchInterval: 1000,
   });
 };

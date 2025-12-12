@@ -15,13 +15,19 @@ export const endpoints = {
     allTrades: baseUrl + "/api/order/open",
   },
   orderEndpoints: {
+    allOrders: baseUrl + "/api/admin/orders",
     allPendingOrders: baseUrl + "/api/order",
-    placeOrder: baseUrl + "/api/order"
+    placeOrder: baseUrl + "/api/order",
   },
   assetEndpoints: {
     allAssets: baseUrl + "/api/marketdata/assets/" + exchange1,
   },
   portfolioEndpoints: {
-    myPortfolios: baseUrl + "/api/client/portfolio"
-  }
+    myPortfolios: baseUrl + "/api/client/portfolio",
+  },
+  adminEndpoints: {
+    clients: baseUrl + "/api/admin/clients",
+    client: baseUrl + "/api/user/admin/user",
+    clientTrades: baseUrl + "/api/admin/clients/",
+  },
 };

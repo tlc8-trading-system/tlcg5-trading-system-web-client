@@ -1,11 +1,11 @@
 import { useQuery} from "@tanstack/react-query";
 import { queryKeys } from "../../query-keys"; 
 import { fetchPortfolios} from "./portfolio-apis"; 
-import type { Portfolio } from "../../../types";
+import type { OutdatedPortfolio } from "../../../types";
 
 
 export const usePortfoliosQuery = () => {
-    return useQuery<Portfolio[]>({
+    return useQuery<OutdatedPortfolio[]>({
         queryKey: queryKeys.portfolios,
         queryFn: fetchPortfolios,
         staleTime: 1000 * 60 * 5, 
