@@ -6,16 +6,27 @@ import { Label } from '../ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { toast } from 'sonner';
 import { Textarea } from '../ui/textarea';
+import type { CreateNewPortfolio } from '../../types';
+import { CreatePortfolio } from '../../api/features/portfolios/portfolio-queries';
 
-export function CreatePortfolio() {
+export function CreateAPortfolio() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
+  const createPortfolioMutation = CreatePortfolio();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newPortfolio: CreateNewPortfolio = {
+      title : name,
+      description : description
+    }
+
+    if (createPortfolioMutation.isPending) return;
+    createPortfolioMutation.mutate(newPortfolio);
     toast.success('Portfolio created successfully');
-    navigate('/portfolio');
+    navigate('/portfolios');
   };
 
   return (
