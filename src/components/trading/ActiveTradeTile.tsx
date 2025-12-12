@@ -9,6 +9,7 @@ import {
 import ModifyTrade from "../modals/ModifyTrade";
 import type { ServerActiveTrade } from "../../types/server";
 import { profitLoss, profitLossPercent } from "../../services/order-service";
+import type { ModifyActiveTrade as IModifyActiveTrade } from "../../types";
 
 interface ActiveTradeTileProps {
   trade: ServerActiveTrade;
@@ -16,11 +17,10 @@ interface ActiveTradeTileProps {
 
 const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
   const [modifyTrade, setModifyTrade] = useState(false);
-  const [modifyTradeData, setModifyTradeData] = useState({
+  const [modifyTradeData, setModifyTradeData] = useState<IModifyActiveTrade>({
     id: trade.id,
-    symbol: trade.product,
-    stopLoss: trade.price.toString(),
-    takeProfit: trade.price.toString(),
+    quantity: trade.quantity,
+    price: trade.price
   });
   const modifyActiveTrade = ModifyActiveTrade();
   const closeActiveTrade = CloseActiveTrade();
