@@ -16,11 +16,10 @@ interface ActiveTradeTileProps {
 
 const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
   const [modifyTrade, setModifyTrade] = useState(false);
-  const [modifyTradeData, setModifyTradeData] = useState({
+  const [modifyTradeData, setModifyTradeData] = useState<IModifyActiveTrade>({
     id: trade.id,
-    symbol: trade.product,
-    stopLoss: trade.price.toString(),
-    takeProfit: trade.price.toString(),
+    quantity: trade.quantity,
+    price: trade.price
   });
   const modifyActiveTrade = ModifyActiveTrade();
   const closeActiveTrade = CloseActiveTrade();

@@ -20,7 +20,7 @@ export const mockActiveTrades = [
   {
     id: "TRD-003",
     product: "AMZN",
-    type: "Short",
+    type: "LIMIT",
     side: "Sell",
     quantity: 30,
     price: 151.2,
