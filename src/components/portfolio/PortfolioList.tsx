@@ -5,7 +5,8 @@ import { usePortfoliosQuery } from "../../api/features/portfolios/portfolio-quer
 
 export function PortfolioList() {
 const navigate = useNavigate();
-const { data: portfolios, isLoading ,isError } = usePortfoliosQuery();
+const { data, isLoading ,isError } = usePortfoliosQuery();
+const portfolios = data?.data;
 
 if (isLoading) {
     return <div className="flex justify-center p-8"><Loader2 className="animate-spin" /></div>;
