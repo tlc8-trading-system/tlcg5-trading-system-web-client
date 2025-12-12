@@ -1,4 +1,4 @@
-import type { CreateNewPortfolio, Portfolio } from "../../../types";
+import type { CreateNewPortfolio } from "../../../types";
 import apiClient from "../../api-client";
 import { endpoints } from "../../api-endpoints";
 

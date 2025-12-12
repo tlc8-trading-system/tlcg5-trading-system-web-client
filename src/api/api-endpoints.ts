@@ -18,7 +18,7 @@ export const endpoints = {
   orderEndpoints: {
     allOrders: baseUrl + "/api/admin/orders",
     allPendingOrders: baseUrl + "/api/order",
-    placeOrder: baseUrl + "/api/order"
+    placeOrder: baseUrl + "/api/order",
   },
   assetEndpoints: {
     allAssets: baseUrl + "/api/marketdata/assets/" + exchange1,
@@ -27,10 +27,13 @@ export const endpoints = {
     myPortfolios: baseUrl + "/api/client/portfolio",
     createPortfolio: baseUrl + "/api/client/portfolio",
     fetchPortfolio: baseUrl + "/api/client/portfolio",
-    fetchPortfolioDetails: baseUrl + "/api/client/portfolio/"
+    fetchPortfolioDetails: baseUrl + "/api/client/portfolio/",
   },
   exchanges: {
     getExchanges: baseUrl + "/api/admin/exchanges",
-    toggleExchange: baseUrl + "/api/admin/exchanges/"
-  }
+    toggleExchange: baseUrl + "/api/admin/exchanges/",
+  },
+  adminEndpoints: {
+    clients: baseUrl + "/api/admin/clients",
+  },
 };
