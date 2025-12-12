@@ -32,7 +32,7 @@ export const CloseActiveTrade = () => {
 };
 
 export const useActiveTrades = () => {
-  return useQuery<ServerResponse<ServerActiveTrade>>({
+  return useQuery<ServerResponse<ServerActiveTrade[]>>({
     queryKey: queryKeys.activeTrades,
     queryFn: fetchActiveTrades,
     refetchInterval: 1000
