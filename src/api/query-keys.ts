@@ -3,5 +3,6 @@ export const queryKeys = {
     pendingOrders: ["pending-orders"],
     activeTrades: ["active-trades"],
     portfolios: ["portfolios"],
-    assets: ["assets"]
+    assets: ["assets"],
+    tradeHistory: ["trade-history"]
 }
