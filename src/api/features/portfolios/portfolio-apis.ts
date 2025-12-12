@@ -10,5 +10,5 @@ export const fetchPortfolios = async (): Promise<Portfolio[]> => {
 };
 
 export const createPortfolio = async (newPortfolio:CreateNewPortfolio ) => {
-  apiClient.post(endpoints.postfolioEndpoints.createPortfolio, newPortfolio)
+  apiClient.post(endpoints.portfolioEndpoints.createPortfolio, newPortfolio)
 }
