@@ -4,7 +4,7 @@ import { fetchTradingHistory } from "./trading-history-api";
 import { queryKeys } from "../../query-keys";
 
 export const useFetchTradingHistory = () => {
-  return useQuery<ServerResponse<ServerActiveTrade>>({
+  return useQuery<ServerResponse<ServerActiveTrade []>>({
     queryKey: queryKeys.activeTrades,
     queryFn: fetchTradingHistory,
   });
