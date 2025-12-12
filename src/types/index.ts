@@ -87,14 +87,13 @@ export interface PendingOrder {
 
 export interface Holdings{
     id: string,
-    symbol: string,
-    type: string,
+    portfolioId: string,
+    asset: string,
     quantity: number,
-    entryPrice: number,
     currentPrice: number,
     profitLoss: number,
     profitLossPercent: number,
-    openDate: string,
+    averagePrice: number
 }
 
 export interface PortfolioDetails {
