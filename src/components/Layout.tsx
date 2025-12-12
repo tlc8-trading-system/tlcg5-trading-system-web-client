@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { TrendingUp, Menu, X, Briefcase, Activity, History } from "lucide-react";
+import { TrendingUp, Menu, X, Briefcase, Activity, LayoutDashboard, Users, Settings, DollarSign, History } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 
@@ -8,13 +8,23 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const {user} = useAuth();
 
+  const isAdmin = user?.role === 'ADMIN';
 
-  const navigation = [
+  const userNavigation = [
     { name: "Place Order", path: "/trading/place-order", icon: TrendingUp },
     {name: "Portfolios", path: "/portfolios", icon: Briefcase },
     { name: 'Orders', path: '/trading/orders', icon: Activity },
     { name: 'History', path: '/trading/history', icon: History}
   ];
+
+   const adminNavigation = [
+    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+    { name: 'Trades', path: '/admin/trades', icon: DollarSign },
+    { name: 'Customers', path: '/admin/customers', icon: Users },
+    { name: 'Exchanges', path: '/admin/exchanges', icon: Settings },
+  ];
+
+  const navigation = isAdmin ? adminNavigation : userNavigation;
 
   return (
     <div className="min-h-screen bg-background">
