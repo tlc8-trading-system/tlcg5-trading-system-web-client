@@ -6,5 +6,6 @@ export const queryKeys = {
     portfolios: ["portfolios"],
     assets: ["assets"],
     tradeHistory: ["trade-history"],
-    portfolioDetails:["portfolio-details"]
+    portfolioDetails:["portfolio-details"],
+    exchanges: ["exchanges"]
 }
