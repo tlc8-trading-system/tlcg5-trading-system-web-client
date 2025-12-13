@@ -12,6 +12,7 @@ import { TradeHistoryPage } from "./components/pages/TradingHistoryPage";
 import { CreatePortfolioPage } from "./components/pages/Portfolio/CreatePortfolioPage";
 import TradesPage from "./components/pages/admin/TradesPage";
 import { PortfolioDetailsPage } from "./components/pages/Portfolio/PortfolioDetailsPage";
+import { ExchangeConfig } from "./components/pages/admin/ExchangeConfig";
 
 const DashboardPages = ({ children }: { children: React.ReactNode }) => {
   return <Layout>{children}</Layout>;
@@ -24,7 +25,7 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-
+          
           <Route element={<ProtectedRoute />}>
             <Route
               path="/dashboard"
@@ -83,6 +84,8 @@ function App() {
                   <DashboardPages>
                     <PortfolioDetailsPage/>
                   </DashboardPages>}/>
+
+            <Route path="/admin/exchanges" element={<ExchangeConfig/>}/>
 
           </Route>
         </Routes>
