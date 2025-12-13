@@ -23,8 +23,8 @@ export function ExchangeConfig() {
 
     <div className="space-y-8">
       <DashboardPagesHeader
-        pageTitle="Trades"
-        pageDescription="Monitor all trading activity">
+        pageTitle="Exchange Configuration"
+        pageDescription="Manage trading exchanges">
 
       </DashboardPagesHeader>
 
