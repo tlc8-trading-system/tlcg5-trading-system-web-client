@@ -114,3 +114,10 @@ export interface Portfolio {
   title: string;
   description: string;
 }
+
+export interface Exchange {
+  id: string;
+  name: string;
+  baseUrl: string;
+  enabled: boolean;
+}
