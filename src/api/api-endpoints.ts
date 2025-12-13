@@ -28,5 +28,9 @@ export const endpoints = {
     createPortfolio: baseUrl + "/api/client/portfolio",
     fetchPortfolio: baseUrl + "/api/client/portfolio",
     fetchPortfolioDetails: baseUrl + "/api/client/portfolio/"
+  },
+  exchanges: {
+    getExchanges: baseUrl + "/api/admin/exchanges",
+    toggleExchange: baseUrl + "/api/admin/exchanges/"
   }
 };
