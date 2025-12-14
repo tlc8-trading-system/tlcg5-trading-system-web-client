@@ -6,6 +6,7 @@ import { getUser } from "./user-apis";
 export const useCurrentUser = (): UseQueryResult<User> => {
   return useQuery<User>({
     queryKey: ["me"], 
-    queryFn: getUser, 
+    queryFn: getUser,
+    retry: 1
   });
 };
