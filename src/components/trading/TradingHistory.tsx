@@ -5,7 +5,7 @@ import { Loader2 } from 'lucide-react';
 
 export function TradeHistory() {
   const { data, isLoading ,isError } = useFetchTradingHistory();
-  const TradingHistory= data?.data;
+  const tradingHistory = data?.data;
 
   if (isLoading) {
     return <div className="flex justify-center p-8"><Loader2 className="animate-spin" /></div>;
@@ -15,8 +15,8 @@ if (isError) {
     return <div className="text-red-500">Failed to load portfolios.</div>;
   }
 
-  if (!data){
-    return 
+  if (!data) {
+    return null;
   }
   return (
     <div className="space-y-8">
@@ -32,17 +32,22 @@ if (isError) {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-border">
+                  <th className="text-left py-3 px-2">Date</th>
                   <th className="text-left py-3 px-2">Product</th>
                   <th className="text-left py-3 px-2">Side</th>
                   <th className="text-left py-3 px-2">Type</th>
                   <th className="text-left py-3 px-2">Qty</th>
                   <th className="text-left py-3 px-2">Price</th>
                   <th className="text-left py-3 px-2">Status</th>
+                  <th className="text-left py-3 px-2">Exchange</th>
                 </tr>
               </thead>
               <tbody>
-                {TradingHistory?.map((trade) => (
+                {tradingHistory?.map((trade) => (
                   <tr key={trade.id} className="border-b border-border hover:bg-muted/30 transition-colors">
+                    <td className="py-4 px-2">
+                      {new Date(trade.updatedAt).toLocaleDateString()}
+                    </td>
                     <td className="py-4 px-2">
                       {trade.product}
                     </td>
@@ -61,13 +66,18 @@ if (isError) {
                     <td className="py-4 px-2">
                       <Badge variant="outline">{trade.status}</Badge>
                     </td>
+                    <td className="py-4 px-2">
+                      <Badge variant = {trade.exchangeId.startsWith('1914') ? 'default' : 'secondary'}>
+                        {trade.exchangeId.startsWith('1914')? 'Ex.1': 'Ex.2'}
+                      </Badge>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          {TradeHistory.length === 0 && (
+          {tradingHistory?.length === 0 && (
             <div className="text-center py-12 text-muted-foreground">
               No trades found
             </div>
