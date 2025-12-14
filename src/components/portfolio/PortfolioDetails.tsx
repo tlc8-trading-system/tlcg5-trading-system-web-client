@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { TrendingUp, TrendingDown, DollarSign, Activity, AlertCircle, Loader2 } from 'lucide-react';
 import DashboardPagesHeader from '../shared/dashboard-pages-header';
 import { usePortfolioDetailsQuery } from '../../api/features/portfolios/portfolio-queries';
+import { formatDate } from '../../lib/utils';
 
 export function PortfolioDetails() {
   const { id } = useParams<{ id: string }>();
@@ -17,7 +18,8 @@ export function PortfolioDetails() {
   }
 
 
-  const portfolio = data?.data
+  const portfolio_response = data?.data
+  const portfolio = portfolio_response?.portfolio;
 
   if (!portfolio) {
     return (
@@ -29,12 +31,11 @@ export function PortfolioDetails() {
   }
 
   <DashboardPagesHeader
-    pageTitle={portfolio.name}
+    pageTitle={portfolio.title}
     pageDescription={portfolio.description}
   />
 
-  const holdings = portfolio?.holdings;
-
+  const holdings = portfolio_response.holdings;
 
 
 
@@ -77,17 +78,17 @@ export function PortfolioDetails() {
             <Activity className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl">{portfolio?.count}</div>
+            <div className="text-2xl">{portfolio?.assetCount}</div>
           </CardContent>
         </Card>
 
         <Card className="shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm">Last Updated</CardTitle>
+            <CardTitle className="text-sm">Created At</CardTitle>
             <AlertCircle className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-sm">{new Date(portfolio.lastUpdated).toLocaleString()}</div>
+            <div className="text-sm">{formatDate(portfolio.createdAt)}</div>
           </CardContent>
         </Card>
       </div>
