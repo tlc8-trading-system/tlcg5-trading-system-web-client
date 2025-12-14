@@ -78,7 +78,7 @@ export function PortfolioDetails() {
             <Activity className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl">{portfolio?.assetCount}</div>
+            <div className="text-2xl">{portfolio?.count}</div>
           </CardContent>
         </Card>
 
