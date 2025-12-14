@@ -96,14 +96,7 @@ export interface Holdings{
 }
 
 export interface PortfolioDetails {
-  id: string;
-  title: string;
-  description: string;
-  value: number;
-  profitLoss: number;
-  profitLossPercent: number;
-  count: number;
-  lastUpdated: string;
+  portfolio: Portfolio;
   holdings: Holdings[];
 }
  
@@ -115,6 +108,7 @@ export interface Portfolio {
   profitLoss: number;
   profitLossPercent: number;
   count: number;
+  createdAt: string;
 }
  export interface CreateNewPortfolio {
   title: string;
