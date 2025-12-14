@@ -49,3 +49,23 @@ export interface ServerAsset {
   BUY_LIMIT: number;
   ASK_PRICE: number;
 }
+
+export interface ServerTradeHistory {
+  id : string,
+  product: string,
+  side: string,
+  type: string,
+  quantity: number,
+  price: number,
+  status: string,
+  exchangeId: string,
+  clientId: string,
+  portfolioId: string,
+  createdAt: string,
+  updatedAt: string,
+  requested_quantity: number,
+  requested_price : number,
+  filledQuantity: number,
+  filledPrice: number,
+  requestedExchange: string
+}
