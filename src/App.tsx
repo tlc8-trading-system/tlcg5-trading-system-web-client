@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          
+
           <Route element={<ProtectedRoute />}>
             <Route
               path="/dashboard"
@@ -85,7 +85,12 @@ function App() {
                     <PortfolioDetailsPage/>
                   </DashboardPages>}/>
 
-            <Route path="/admin/exchanges" element={<ExchangeConfig/>}/>
+            <Route path="/admin/exchanges"
+              element={
+                <DashboardPages>
+                  <ExchangeConfig />
+                </DashboardPages>}
+            />
 
           </Route>
         </Routes>
