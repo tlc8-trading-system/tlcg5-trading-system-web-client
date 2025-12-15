@@ -1,4 +1,5 @@
 import { CancelOrder } from "../../api/features/pending-orders/pending-order-queries";
+import { formatDate } from "../../lib/utils";
 import type { ServerActiveTrade as PendingOrder } from "../../types/server";
 
 import { Badge } from "../ui/badge";
@@ -19,10 +20,13 @@ const PendingOrderTile: React.FC<PendingOrderTileProps> = ({ order }) => {
       <div className="flex-1 space-y-2 text-left">
         <div className="flex items-center gap-3">
           <span>{order.product}</span>
-          <Badge variant={order.type === "Buy" ? "default" : "secondary"}>
+          <Badge variant={order.side === "BUY" ? "default" : "secondary"}>
+            {order.side}
+          </Badge>
+          <Badge variant={order.type === "MARKET" ? "default" : "secondary"}>
             {order.type}
           </Badge>
-          <Badge
+          {/* <Badge
             variant={
               order.status === "Pending"
                 ? "outline"
@@ -32,12 +36,12 @@ const PendingOrderTile: React.FC<PendingOrderTileProps> = ({ order }) => {
             }
           >
             {order.status}
-          </Badge>
+          </Badge> */}
         </div>
         <div className="text-sm text-muted-foreground">
           Quantity: {order.quantity} @{" "}
           {order.price ? `$${order.price}` : "Market Price"} •{" "}
-          {/* {formatDate(order.timestamp)} */}
+          {formatDate(order.createdAt)}
         </div>
       </div>
       <Button

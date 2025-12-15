@@ -31,10 +31,11 @@ const ActiveTrades:React.FC<ActiveTradeProps> = ({clientId}) => {
               Failed to fetch active trades, showing mock trades instead
             </p>
           )}
-          <table className="w-full flex items-center justify-start flex-col min-h-48">
+          <table className="w-full">
             <thead className="w-full">
-              <tr className="border-b border-border flex items-center justify-between">
+              <tr className="border-b border-border ">
                 <th className="text-left py-3 px-2">Symbol</th>
+                <th className="text-left py-3 px-2">Side</th>
                 <th className="text-left py-3 px-2">Position</th>
                 <th className="text-right py-3 px-2">Qty</th>
                 <th className="text-right py-3 px-2">Entry</th>
@@ -43,7 +44,7 @@ const ActiveTrades:React.FC<ActiveTradeProps> = ({clientId}) => {
                 <th className="text-right py-3 px-2">Actions</th>
               </tr>
             </thead>
-            <tbody className="w-full flex flex-col items-center justify-start">
+            <tbody className="w-full">
               {isLoading && (
                 <div className="w-full flex items-center justify-center pt-12">
                   <Spinner />

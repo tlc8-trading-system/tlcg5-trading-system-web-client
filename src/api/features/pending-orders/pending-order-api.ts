@@ -16,7 +16,7 @@ export const fetchPendingOrders = async (clientId?: string) => {
   const { data } = await apiClient.get(
     clientId
       ? endpoints.adminEndpoints.clientTrades + clientId + "/orders"
-      : endpoints.tradeEndpoints.allTrades
+      : endpoints.orderEndpoints.allPendingOrders
   );
   return data;
 };

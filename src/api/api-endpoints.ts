@@ -12,8 +12,8 @@ export const endpoints = {
     balance: baseUrl + "/api/client/balance",
   },
   tradeEndpoints: {
-    allTrades: baseUrl + "/api/order/open",
     tradeHistory: baseUrl + "/api/order/history",
+    allTrades: baseUrl + "/api/order",
   },
   orderEndpoints: {
     allOrders: baseUrl + "/api/admin/orders",
