@@ -20,7 +20,8 @@ export default function ClientsList() {
 
   const filteredCustomers = allClients.filter(
     (customer) =>
-      customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      customer.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      customer.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
       customer.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -52,7 +53,12 @@ export default function ClientsList() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left py-3 px-2">Client</th>
+                    <th
+                      className="text-left py-3 px-2"
+                      onClick={() => console.log(allClients[0].activeTradesCount)}
+                    >
+                      Client
+                    </th>
                     <th className="text-left py-3 px-2">Role</th>
                     <th className="text-right py-3 px-2">Total Value</th>
                     <th className="text-right py-3 px-2">P/L</th>
@@ -63,15 +69,17 @@ export default function ClientsList() {
                 <tbody>
                   {filteredCustomers.map((customer) => (
                     <tr
-                      key={customer.id}
+                      key={customer.userId}
                       className="border-b border-border hover:bg-muted/30 transition-colors cursor-pointer"
                       onClick={() =>
-                        navigate(`/admin/clients/${customer.id}`)
+                        navigate(`/admin/clients/${customer.userId}`)
                       }
                     >
                       <td className="py-4 px-2">
                         <div>
-                          <div>{customer.name}</div>
+                          <div>
+                            {customer.firstname + " " + customer.lastname}
+                          </div>
                           <div className="text-sm text-muted-foreground">
                             {customer.email}
                           </div>
@@ -83,32 +91,32 @@ export default function ClientsList() {
                         </Badge>
                       </td>
                       <td className="text-right py-4 px-2">
-                        ${customer.totalValue.toLocaleString()}
+                        {/* ${customer.totalValue.toLocaleString()} */} 100,000
                       </td>
                       <td className="text-right py-4 px-2">
                         <div className="flex items-center justify-end gap-1">
-                          {+customer.pnl >= 0 ? (
+                          {+customer.profitLoss >= 0 ? (
                             <TrendingUp className="size-3 text-green-500" />
                           ) : (
                             <TrendingDown className="size-3 text-red-500" />
                           )}
                           <span
                             className={
-                              +customer.pnl >= 0
+                              +customer.profitLoss >= 0
                                 ? "text-green-600 dark:text-green-500"
                                 : "text-red-600 dark:text-red-500"
                             }
                           >
-                            {+customer.pnl >= 0 ? "+" : ""}$
-                            {Math.abs(+customer.pnl).toLocaleString()}
+                            {customer.profitLoss >= 0 ? "+" : ""}$
+                            {Math.abs(customer.profitLoss).toLocaleString()}
                           </span>
                         </div>
                       </td>
                       <td className="text-center py-4 px-2">
-                        {customer.portfolios}
+                        {customer.portfolioCount}
                       </td>
                       <td className="text-center py-4 px-2">
-                        {customer.activeTrades}
+                        {customer.activeTradesCount}
                       </td>
                     </tr>
                   ))}
@@ -123,7 +131,11 @@ export default function ClientsList() {
             </div>
           )}
 
-          {isLoading && <div className="w-full flex items-center justify-center"><Spinner /></div>}
+          {isLoading && (
+            <div className="w-full flex items-center justify-center">
+              <Spinner />
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

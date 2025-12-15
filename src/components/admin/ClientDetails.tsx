@@ -37,7 +37,7 @@ export default function ClientDetails() {
       </Button>
       <div className="flex items-center gap-4">
         <div className="flex-1">
-          <h1>{isLoading ? "..." : client.name}</h1>
+          <h1>{isLoading ? "..." : client.firstname + " " + client.lastname}</h1>
           <p className="text-muted-foreground mt-1">
             Client details and activity
           </p>
@@ -90,17 +90,17 @@ export default function ClientDetails() {
           <CardContent>
             <div
               className={`text-2xl flex items-center gap-2 ${
-                +client.pnl >= 0
+                client.profitLoss >= 0
                   ? "text-green-600 dark:text-green-500"
                   : "text-red-600 dark:text-red-500"
               }`}
             >
-              {+client.pnl >= 0 ? (
+              {client.profitLoss >= 0 ? (
                 <TrendingUp className="size-5" />
               ) : (
                 <TrendingDown className="size-5" />
               )}
-              {+client.pnl >= 0 ? "+" : ""}${"+client.pnl.toLocaleString()"}
+              {client.profitLoss >= 0 ? "+" : ""}${"+client.pnl.toLocaleString()"}
             </div>
           </CardContent>
         </Card>
@@ -110,7 +110,7 @@ export default function ClientDetails() {
             <CardTitle className="text-sm">Active Trades</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl">{client.activeTrades}</div>
+            <div className="text-2xl">{client.activeTradesCount}</div>
           </CardContent>
         </Card>
       </div>
@@ -118,7 +118,7 @@ export default function ClientDetails() {
       {/* Portfolios */}
       <Card className="shadow-sm">
         <CardHeader>
-          <CardTitle>Portfolios ({client.portfolios})</CardTitle>
+          <CardTitle>Portfolios ({client.portfolioCount})</CardTitle>
         </CardHeader>
         <CardContent>
           <PortfolioList />

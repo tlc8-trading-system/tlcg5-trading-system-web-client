@@ -122,14 +122,19 @@ export interface Exchange {
   enabled: boolean;
 }
 export interface Client {
-  id: string;
-  name: string;
+  userId: string;
+  firstname: string;
+  lastname: string;
   email: string;
   role: string;
-  totalValue: number;
-  pnl: string;
-  portfolios: number;
-  activeTrades: number;
+  // totalValue: number;
+  profitLoss: number;
+  profitLossPercentage: string;
+  portfolioCount: number;
+  balance: number;
+  activeTradesCount: number;
+  createdAt: string;
+  deletedAt: string | null;
 }
 
 export interface ClientDetail {
