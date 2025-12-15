@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { useFetchTradingHistory } from '../../api/features/trading-history/trading-queries';
 import { Loader2 } from 'lucide-react';
+import { formatDate } from '../../lib/utils';
 
 export function TradeHistory() {
   const { data, isLoading ,isError } = useFetchTradingHistory();
@@ -46,7 +47,7 @@ if (isError) {
                 {tradingHistory?.map((trade) => (
                   <tr key={trade.id} className="border-b border-border hover:bg-muted/30 transition-colors">
                     <td className="py-4 px-2">
-                      {new Date(trade.updatedAt).toLocaleDateString()}
+                      {formatDate(trade.updatedAt)}
                     </td>
                     <td className="py-4 px-2">
                       {trade.product}
