@@ -70,6 +70,7 @@ export interface ActiveTrade {
 
 export interface ModifyActiveTrade {
   id: string;
+  type: string;
   quantity: number;
   price?: number;
 }

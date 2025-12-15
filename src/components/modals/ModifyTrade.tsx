@@ -33,7 +33,7 @@ const ModifyTrade: React.FC<ModifyTradeProps> = ({
     <Dialog open={showModifyDialog} onOpenChange={setShowModifyDialog}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Modify your trade</DialogTitle>
+          <DialogTitle>Modify your order</DialogTitle>
           <DialogDescription>
             Adjust quantity {trade.type === "LIMIT" && "and price"} for your{" "}
             {trade.product}

@@ -1,12 +1,9 @@
 import { Badge } from "../ui/badge";
-import { Edit2, TrendingDown, TrendingUp, X } from "lucide-react";
+import { TrendingDown, TrendingUp, X } from "lucide-react";
 import { Button } from "../ui/button";
-import { useState } from "react";
 import {
   CloseActiveTrade,
-  ModifyActiveTrade,
 } from "../../api/features/active-orders/active-order-queries";
-import ModifyTrade from "../modals/ModifyTrade";
 import type { ServerActiveTrade } from "../../types/server";
 import { profitLoss } from "../../services/order-service";
 
@@ -15,18 +12,9 @@ interface ActiveTradeTileProps {
 }
 
 const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
-  const [modifyTrade, setModifyTrade] = useState(false);
-  const [modifyTradeData, setModifyTradeData] = useState<IModifyActiveTrade>({
-    id: trade.id,
-    quantity: trade.quantity,
-    price: trade.price
-  });
-  const modifyActiveTrade = ModifyActiveTrade();
+
   const closeActiveTrade = CloseActiveTrade();
 
-  const saveTradeModification = () => {
-    modifyActiveTrade.mutate(modifyTradeData);
-  };
 
   const closeTrade = () => {
     closeActiveTrade.mutate(trade.id);
@@ -72,16 +60,7 @@ const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
         </td>
         <td className="py-4 px-2">
           <div className="flex items-center justify-end gap-2">
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => {
-                setModifyTrade(true);
-              }}
-            >
-              <Edit2 className="size-3 mr-1" />
-              Modify
-            </Button>
+            
             <Button size="sm" variant="outline" onClick={closeTrade}>
               <X className="size-3 mr-1" />
               Close
@@ -89,14 +68,7 @@ const ActiveTradeTile: React.FC<ActiveTradeTileProps> = ({ trade }) => {
           </div>
         </td>
       </tr>
-      <ModifyTrade
-        trade={trade}
-        handleSaveModify={saveTradeModification}
-        modifyData={modifyTradeData}
-        setModifyData={setModifyTradeData}
-        setShowModifyDialog={setModifyTrade}
-        showModifyDialog={modifyTrade}
-      />
+
     </>
   );
 };

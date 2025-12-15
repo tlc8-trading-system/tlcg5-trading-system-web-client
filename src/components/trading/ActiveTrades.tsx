@@ -50,7 +50,7 @@ const ActiveTrades:React.FC<ActiveTradeProps> = ({clientId}) => {
                   <Spinner />
                 </div>
               )}
-              {mockActiveTrades.map((trade) => (
+              {activeTrades.map((trade) => (
                 <ActiveTradeTile trade={trade} key={trade.id} />
               ))}
             </tbody>

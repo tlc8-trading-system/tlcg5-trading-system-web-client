@@ -1,16 +1,34 @@
 import { CancelOrder } from "../../api/features/pending-orders/pending-order-queries";
 import { formatDate } from "../../lib/utils";
 import type { ServerActiveTrade as PendingOrder } from "../../types/server";
-
+import { useState } from "react";
+import type { ModifyActiveTrade as IModifyActiveTrade } from "../../types";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
+import ModifyTrade from "../modals/ModifyTrade";
+import { ModifyActiveTrade } from "../../api/features/active-orders/active-order-queries";
+import { Edit2 } from "lucide-react";
 
 interface PendingOrderTileProps {
   order: PendingOrder;
 }
 
 const PendingOrderTile: React.FC<PendingOrderTileProps> = ({ order }) => {
+  const [modifyTrade, setModifyTrade] = useState(false);
+  const [modifyTradeData, setModifyTradeData] = useState<IModifyActiveTrade>({
+    id: order.id,
+    type: order.type,
+    quantity: order.quantity,
+    price: order.price,
+  });
+  const modifyActiveTrade = ModifyActiveTrade();
+
   const cancelOrder = CancelOrder();
+
+  const saveTradeModification = () => {
+    modifyActiveTrade.mutate(modifyTradeData);
+    setModifyTrade(false);
+  };
 
   return (
     <div
@@ -47,10 +65,28 @@ const PendingOrderTile: React.FC<PendingOrderTileProps> = ({ order }) => {
       <Button
         size="sm"
         variant="outline"
+        onClick={() => {
+          setModifyTrade(true);
+        }}
+      >
+        <Edit2 className="size-3 mr-1" />
+        Modify
+      </Button>
+      <Button
+        size="sm"
+        variant="outline"
         onClick={() => cancelOrder.mutate(order.id)}
       >
         Cancel
       </Button>
+      <ModifyTrade
+        trade={order}
+        handleSaveModify={saveTradeModification}
+        modifyData={modifyTradeData}
+        setModifyData={setModifyTradeData}
+        setShowModifyDialog={setModifyTrade}
+        showModifyDialog={modifyTrade}
+      />
     </div>
   );
 };

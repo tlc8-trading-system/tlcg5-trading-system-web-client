@@ -7,7 +7,7 @@ import type { ServerActiveTrade, ServerResponse } from "../../../types/server";
 
 export const ModifyActiveTrade = () => {
   const onSuccess = () => {
-    toast("Trade modified successfully");
+    toast("Order modified successfully");
     queryClient.invalidateQueries({ queryKey: queryKeys.activeTrades });
   };
 

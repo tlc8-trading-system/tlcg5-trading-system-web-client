@@ -4,8 +4,8 @@ import { endpoints } from "../../api-endpoints";
 
 export const modifyActiveTrade = async (newTradeData: ModifyActiveTrade) => {
   await apiClient.put(
-    endpoints.orderEndpoints.allPendingOrders + newTradeData.id,
-    newTradeData
+    endpoints.orderEndpoints.allPendingOrders + "/" + newTradeData.id,
+    {price: newTradeData.price, quantity: newTradeData.quantity, type: newTradeData.type}
   );
 };
 
