@@ -173,22 +173,22 @@ export default function TradesList() {
                         {trade.price ? `USD ${trade.price.toFixed(2)}` : "-"}
                       </td>
                       <td className="text-right py-4 px-2">
-                        {profitLoss() !== null && profitLoss() !== undefined ? (
+                        {profitLoss(trade) !== null && profitLoss(trade) !== undefined ? (
                           <div className="flex items-center justify-end gap-1">
-                            {profitLoss() >= 0 ? (
+                            {profitLoss(trade) >= 0 ? (
                               <TrendingUp className="size-3 text-green-500" />
                             ) : (
                               <TrendingDown className="size-3 text-red-500" />
                             )}
                             <span
                               className={
-                                profitLoss() >= 0
+                                profitLoss(trade) >= 0
                                   ? "text-green-600 dark:text-green-500"
                                   : "text-red-600 dark:text-red-500"
                               }
                             >
-                              {profitLoss() >= 0 ? "+" : ""}USD{" "}
-                              {Math.abs(profitLoss()).toLocaleString()}
+                              {profitLoss(trade) >= 0 ? "+" : ""}USD{" "}
+                              {Math.abs(profitLoss(trade)).toLocaleString()}
                             </span>
                           </div>
                         ) : (

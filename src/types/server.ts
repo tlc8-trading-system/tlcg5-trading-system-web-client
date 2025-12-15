@@ -38,6 +38,16 @@ export interface ServerActiveTrade {
   quantity: number;
   price: number;
   status: string;
+  exchangeId: string;
+  clientId: string;
+  portfolioId: string;
+  createdAt: string;
+  updatedAt: string;
+  requested_quantity: number;
+  requested_price: number;
+  filledQuantity: number;
+  filledPrice: number;
+  requestedExchange: string;
 }
 
 export interface ServerAsset {

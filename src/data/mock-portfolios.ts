@@ -1,191 +1,63 @@
-import type { Portfolio, PortfolioDetails } from "../types";
-
-export const mockPortfolioDetails: PortfolioDetails[] = [
+export interface Portfolio {
+  id: string;
+  title: string;
+  description: string;
+  value: number;
+  profitLoss: number;
+  profitLossPercent: number;
+  count: number;
+}
+ 
+export const mockPortfolios: Portfolio[] = [
   {
     id: "1",
-    name: "Growth Portfolio",
+    title: "Growth Portfolio",
     description: "Long-term growth focused on tech stocks",
     value: 125430.50,
     profitLoss: 8234.25,
     profitLossPercent: 7.02,
     count: 3,
-    lastUpdated: "2025-12-01T10:30:00",
-    holdings: [
-      {
-        id: "1-AAPL",
-        asset: "AAPL",
-        quantity: 50,
-        averagePrice: 150,
-        currentPrice: 189.23,
-        profitLoss: (189.23 - 150) * 50,
-        profitLossPercent: ((189.23 - 150) / 150) * 100,
-      },
-      {
-        id: "1-GOOGL",
-        asset: "GOOGL",
-        quantity: 20,
-        averagePrice: 120,
-        currentPrice: 134.55,
-        profitLoss: (134.55 - 120) * 20,
-        profitLossPercent: ((134.55 - 120) / 120) * 100,
-      },
-      {
-        id: "1-MSFT",
-        asset: "MSFT",
-        quantity: 15,
-        averagePrice: 300,
-        currentPrice: 335.10,
-        profitLoss: (335.10 - 300) * 15,
-        profitLossPercent: ((335.10 - 300) / 300) * 100,
-      },
-    ],
   },
-
   {
     id: "2",
-    name: "Conservative Portfolio",
+    title: "Conservative Portfolio",
     description: "Low-risk dividend stocks",
-    value: 87650,
+    value: 87650.0,
     profitLoss: -1234.5,
     profitLossPercent: -1.39,
     count: 2,
-    lastUpdated: "2025-12-01T10:28:00",
-    holdings: [
-      {
-        id: "2-JNJ",
-        asset: "JNJ",
-        quantity: 40,
-        averagePrice: 170,
-        currentPrice: 165.80,
-        profitLoss: (165.80 - 170) * 40,
-        profitLossPercent: ((165.80 - 170) / 170) * 100,
-      },
-      {
-        id: "2-PG",
-        asset: "PG",
-        quantity: 25,
-        averagePrice: 150,
-        currentPrice: 144.30,
-        profitLoss: (144.30 - 150) * 25,
-        profitLossPercent: ((144.30 - 150) / 150) * 100,
-      },
-    ],
   },
-
   {
     id: "3",
-    name: "Tech Focus",
+    title: "Tech Focus",
     description: "High-growth tech companies",
     value: 45200.75,
     profitLoss: 3450.25,
     profitLossPercent: 8.27,
     count: 2,
-    lastUpdated: "2025-12-01T10:25:00",
-    holdings: [
-      {
-        id: "3-NVDA",
-        asset: "NVDA",
-        quantity: 10,
-        averagePrice: 270,
-        currentPrice: 305.20,
-        profitLoss: (305.20 - 270) * 10,
-        profitLossPercent: ((305.20 - 270) / 270) * 100,
-      },
-      {
-        id: "3-TSLA",
-        asset: "TSLA",
-        quantity: 8,
-        averagePrice: 380,
-        currentPrice: 425.50,
-        profitLoss: (425.50 - 380) * 8,
-        profitLossPercent: ((425.50 - 380) / 380) * 100,
-      },
-    ],
   },
-
   {
     id: "4",
-    name: "Income Fund",
-    description: "Stable income through bonds and dividends",
+    title: "Income Fund",
+    description: "Stable income through bonds and blue-chip dividends",
     value: 69320.40,
     profitLoss: 1420.10,
     profitLossPercent: 2.09,
     count: 3,
-    lastUpdated: "2025-12-01T10:20:00",
-    holdings: [
-      {
-        id: "4-T",
-        asset: "T",
-        quantity: 100,
-        averagePrice: 17,
-        currentPrice: 18.50,
-        profitLoss: (18.50 - 17) * 100,
-        profitLossPercent: ((18.50 - 17) / 17) * 100,
-      },
-      {
-        id: "4-VZ",
-        asset: "VZ",
-        quantity: 60,
-        averagePrice: 40,
-        currentPrice: 42.75,
-        profitLoss: (42.75 - 40) * 60,
-        profitLossPercent: ((42.75 - 40) / 40) * 100,
-      },
-      {
-        id: "4-BND",
-        asset: "BND",
-        quantity: 30,
-        averagePrice: 80,
-        currentPrice: 85.10,
-        profitLoss: (85.10 - 80) * 30,
-        profitLossPercent: ((85.10 - 80) / 80) * 100,
-      },
-    ],
   },
-
   {
     id: "5",
-    name: "Aggressive Growth",
-    description: "High-risk emerging tech and biotech",
+    title: "Aggressive Growth",
+    description: "High-risk, high-reward emerging tech and biotech",
     value: 38210.80,
     profitLoss: -2200.75,
     profitLossPercent: -5.44,
     count: 3,
-    lastUpdated: "2025-12-01T10:15:00",
-    holdings: [
-      {
-        id: "5-PLTR",
-        asset: "PLTR",
-        quantity: 100,
-        averagePrice: 15,
-        currentPrice: 12.45,
-        profitLoss: (12.45 - 15) * 100,
-        profitLossPercent: ((12.45 - 15) / 15) * 100,
-      },
-      {
-        id: "5-CRSP",
-        asset: "CRSP",
-        quantity: 20,
-        averagePrice: 90,
-        currentPrice: 75.30,
-        profitLoss: (75.30 - 90) * 20,
-        profitLossPercent: ((75.30 - 90) / 90) * 100,
-      },
-      {
-        id: "5-SPCE",
-        asset: "SPCE",
-        quantity: 200,
-        averagePrice: 12,
-        currentPrice: 8.90,
-        profitLoss: (8.90 - 12) * 200,
-        profitLossPercent: ((8.90 - 12) / 12) * 100,
-      },
-    ],
   },
 ];
 
 
-export const mockPortfolios: Portfolio[] = [
+export const mockPortfoliosNew: Portfolio[] = [
   {
     id: "1",
     title: "Growth Portfolio",
