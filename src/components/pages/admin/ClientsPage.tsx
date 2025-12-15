@@ -91,7 +91,7 @@ export default function ClientsList() {
                         </Badge>
                       </td>
                       <td className="text-right py-4 px-2">
-                        {/* ${customer.totalValue.toLocaleString()} */} 100,000
+                        ${customer.totalValue.toLocaleString()} 
                       </td>
                       <td className="text-right py-4 px-2">
                         <div className="flex items-center justify-end gap-1">

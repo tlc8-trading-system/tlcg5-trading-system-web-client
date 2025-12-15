@@ -30,7 +30,7 @@ export default function ClientDetails() {
       <Button
         variant="outline"
         size="sm"
-        onClick={() => navigate("/admin/customers")}
+        onClick={() => navigate("/admin/clients")}
       >
         <ArrowLeft className="size-4 mr-2" />
         Back
@@ -78,8 +78,7 @@ export default function ClientDetails() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl">
-              {/* ${client.totalValue.toLocaleString()} */}
-              ${"100,000"}
+              ${client.totalValue.toLocaleString()}
             </div>
           </CardContent>
         </Card>

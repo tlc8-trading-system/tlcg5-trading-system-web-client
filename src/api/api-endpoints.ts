@@ -35,7 +35,6 @@ export const endpoints = {
   },
   adminEndpoints: {
     clients: baseUrl + "/api/admin/clients",
-    client: baseUrl + "/api/user/admin/user",
     clientTrades: baseUrl + "/api/admin/clients/",
   },
 };

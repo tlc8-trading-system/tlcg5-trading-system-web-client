@@ -8,7 +8,7 @@ export const fetchClients = async () => {
 
 export const fetchaClient = async (clientId?: string) => {
   const { data } = await apiClient.get(
-    endpoints.adminEndpoints.client + "/" + clientId
+    endpoints.adminEndpoints.clients + "/" + clientId
   );
   return data;
 };

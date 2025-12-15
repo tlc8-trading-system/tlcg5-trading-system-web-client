@@ -127,7 +127,7 @@ export interface Client {
   lastname: string;
   email: string;
   role: string;
-  // totalValue: number;
+  totalValue: number;
   profitLoss: number;
   profitLossPercentage: string;
   portfolioCount: number;
