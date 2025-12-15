@@ -78,7 +78,8 @@ export default function ClientDetails() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl">
-              ${"client.totalValue.toLocaleString()"}
+              {/* ${client.totalValue.toLocaleString()} */}
+              ${"100,000"}
             </div>
           </CardContent>
         </Card>
@@ -100,7 +101,7 @@ export default function ClientDetails() {
               ) : (
                 <TrendingDown className="size-5" />
               )}
-              {client.profitLoss >= 0 ? "+" : ""}${"+client.pnl.toLocaleString()"}
+              {client.profitLoss >= 0 ? "+" : ""}${client.profitLoss?.toLocaleString()}
             </div>
           </CardContent>
         </Card>
