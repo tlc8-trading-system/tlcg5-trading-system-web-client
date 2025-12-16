@@ -4,7 +4,6 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { toast } from 'sonner';
 import { Textarea } from '../ui/textarea';
 import type { CreateNewPortfolio } from '../../types';
 import { CreatePortfolio } from '../../api/features/portfolios/portfolio-queries';
@@ -25,8 +24,6 @@ export function CreateAPortfolio() {
 
     if (createPortfolioMutation.isPending) return;
     createPortfolioMutation.mutate(newPortfolio);
-    toast.success('Portfolio created successfully');
-    navigate('/portfolios');
   };
 
   return (
@@ -57,6 +54,7 @@ export function CreateAPortfolio() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   rows={4}
+                  required
                 />
               </div>
 
