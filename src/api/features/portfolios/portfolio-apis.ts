@@ -15,5 +15,5 @@ export const fetchPortfolioDetails = async (id?:string) => {
   return data;
 };
 export const createPortfolio = async (newPortfolio:CreateNewPortfolio ) => {
-  apiClient.post(endpoints.portfolioEndpoints.createPortfolio, newPortfolio)
+  return await apiClient.post(endpoints.portfolioEndpoints.createPortfolio, newPortfolio)
 }
