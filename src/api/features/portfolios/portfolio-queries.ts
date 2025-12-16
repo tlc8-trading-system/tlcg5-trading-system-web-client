@@ -4,20 +4,23 @@ import { createPortfolio, fetchPortfolioDetails, fetchPortfolios} from "./portfo
 import type { Portfolio,PortfolioDetails } from "../../../types";
 import type { ServerResponse } from "../../../types/server";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 
 export const usePortfoliosQuery = () => {
     return useQuery<ServerResponse<Portfolio[]>>({
         queryKey: queryKeys.portfolios,
         queryFn: fetchPortfolios,
-        staleTime: 1000 * 60 * 5, 
+        refetchOnMount:'always'
     });
 };
 
 
 export const CreatePortfolio =  () => {
+    const navigate = useNavigate();
     const onSuccess = () =>{
         toast("Porfolio created successfully");
+        navigate("/portfolios")
     };
 
     return useMutation({
