@@ -22,6 +22,7 @@ export const endpoints = {
   },
   assetEndpoints: {
     allAssets: baseUrl + "/api/marketdata/assets/" + exchange1,
+    bestAssets: baseUrl + "/api/marketdata/assets/best",
   },
   portfolioEndpoints: {
     myPortfolios: baseUrl + "/api/client/portfolio",

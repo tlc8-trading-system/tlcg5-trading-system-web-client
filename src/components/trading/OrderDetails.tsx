@@ -7,7 +7,7 @@ import { Separator } from "../ui/separator";
 import { Badge } from "../ui/badge";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { type OrderMode, type OrderType, type Portfolio } from "../../types";
+import { type OrderMode, type OrderType } from "../../types";
 import AssetList from "./AssetList";
 import {
   getOrderSide,
@@ -24,20 +24,10 @@ import {
   SelectValue,
 } from "../ui/select";
 import { usePlaceOrder } from "../../api/features/pending-orders/pending-order-queries";
+import { useAvailableAssets } from "../../api/features/assets/assets-queries";
+import { useMyPortfolios } from "../../api/features/portfolios/portfolios-queries";
 
-interface OrderDetailsProps {
-  portfolios: Portfolio[];
-  tradingAssets: ServerAsset[];
-  isLoading: boolean;
-  error: Error | null;
-}
-
-const OrderDetails: React.FC<OrderDetailsProps> = ({
-  portfolios,
-  tradingAssets,
-  isLoading,
-  error,
-}) => {
+const OrderDetails = () => {
   const navigate = useNavigate();
   const [asset, setAsset] = useState("");
   const [orderType, setOrderType] = useState<OrderType>("Buy");
@@ -48,6 +38,18 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
   const [assetSearch, setAssetSearch] = useState("");
   const [tradelimit, setTradeLimit] = useState(0);
   const [selectedPortfolio, setSelectedPortfolio] = useState("");
+
+  const { data, isLoading, error } = useAvailableAssets();
+  const { data: portfolioData } = useMyPortfolios();
+
+  let tradingAssets =
+    orderType === "Buy"
+      ? data?.data?.bestBuyAssets
+      : data?.data?.bestSellAssets;
+  if (!tradingAssets || error) tradingAssets = [];
+
+  let portfolios = portfolioData?.data;
+  if (!portfolios) portfolios = [];
 
   const orderDescription =
     orderMode === "Market"
