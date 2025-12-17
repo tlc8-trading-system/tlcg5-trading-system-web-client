@@ -14,7 +14,7 @@ const ActiveTrades:React.FC<ActiveTradeProps> = ({clientId}) => {
 
   let activeTrades: ServerActiveTrade[] = [];
   if (data?.data)
-    activeTrades = data.data.filter((order) => order.status === "FILLED");
+    activeTrades = data.data.filter((order) => order.status === "FILLED" && order.side == "BUY");
   if (error) activeTrades = [];
 
   return (

@@ -29,7 +29,8 @@ import { useMyPortfolios } from "../../api/features/portfolios/portfolios-querie
 
 const OrderDetails = () => {
   const navigate = useNavigate();
-  const [asset, setAsset] = useState("");
+  const [asset, setAsset] = useState<ServerAsset | null>(null);
+  const [ticker, setTicker] = useState("");
   const [orderType, setOrderType] = useState<OrderType>("Buy");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
@@ -53,8 +54,8 @@ const OrderDetails = () => {
 
   const orderDescription =
     orderMode === "Market"
-      ? `${orderType} ${quantity} ${asset} at market price`
-      : `${orderType} ${quantity} ${asset} @ $${price} (limit)`;
+      ? `${orderType} ${quantity} ${ticker} at market price`
+      : `${orderType} ${quantity} ${ticker} @ $${price} (limit)`;
 
   const placeOrder = usePlaceOrder(orderDescription, navigate);
 
@@ -72,12 +73,9 @@ const OrderDetails = () => {
   };
 
   const handleAssetSelect = (selectedAsset: (typeof tradingAssets)[0]) => {
-    setAsset(selectedAsset.TICKER);
-    setPrice(
-      orderType === "Buy"
-        ? selectedAsset.ASK_PRICE.toString()
-        : selectedAsset.BID_PRICE.toString()
-    );
+    setAsset(selectedAsset);
+    setTicker(selectedAsset.TICKER);
+    setPrice(selectedAsset.LAST_TRADED_PRICE.toString());
     setAssetSearch("");
     setTradeLimit(
       orderType === "Buy" ? selectedAsset.BUY_LIMIT : selectedAsset.SELL_LIMIT
@@ -90,7 +88,7 @@ const OrderDetails = () => {
     e.preventDefault();
 
     const newOrder: PlaceOrderRequest = {
-      product: asset,
+      product: ticker,
       side: getOrderSide(orderType),
       type: getOrderType(orderMode),
       quantity: +quantity,
@@ -177,11 +175,11 @@ const OrderDetails = () => {
                 <Input
                   id="asset"
                   placeholder="Search assets..."
-                  value={asset || assetSearch}
+                  value={ticker || assetSearch}
                   onChange={(e) => {
                     const value = e.target.value.toUpperCase();
-                    if (asset) {
-                      setAsset(value);
+                    if (ticker) {
+                      setTicker(value);
                     } else {
                       setAssetSearch(value);
                     }
@@ -195,7 +193,7 @@ const OrderDetails = () => {
               </div>
 
               {showAssetList &&
-                (assetSearch || !asset) &&
+                (assetSearch || !ticker) &&
                 (isLoading ? (
                   <div className="absolute z-20 w-full mt-1 bg-card border border-border rounded-md shadow-lg max-h-64 overflow-y-auto min-h-32 flex items-center justify-center">
                     Loading...
@@ -209,7 +207,6 @@ const OrderDetails = () => {
                       </p>
                     )}
                     <AssetList
-                      orderType={orderType}
                       filteredAssets={filteredAssets}
                       handleStockSelect={handleAssetSelect}
                       showAssetList={setShowAssetList}
@@ -246,7 +243,19 @@ const OrderDetails = () => {
                   step="0.01"
                   placeholder="0.00"
                   value={(+price).toFixed(2)}
-                  onChange={(e) => setPrice(e.target.value)}
+                  onChange={(e) => {
+                    const val = Number(e.target.value);
+                    if (asset) {
+                      if (
+                        val <
+                          asset?.LAST_TRADED_PRICE - asset?.MAX_PRICE_SHIFT ||
+                        val > asset?.LAST_TRADED_PRICE + asset.MAX_PRICE_SHIFT
+                      ) {
+                        return;
+                      }
+                      setPrice(val.toString());
+                    }
+                  }}
                   required
                   disabled={orderMode == "Market"}
                 />
@@ -312,7 +321,7 @@ const OrderDetails = () => {
             <Button
               type="submit"
               className="flex-1 h-12"
-              disabled={!asset || !quantity || !price}
+              disabled={!ticker || !quantity || !price}
             >
               Submit Order
             </Button>
@@ -320,7 +329,7 @@ const OrderDetails = () => {
               type="button"
               variant="outline"
               onClick={() => {
-                setAsset("");
+                setTicker("");
                 setQuantity("");
                 setPrice("");
                 setAssetSearch("");

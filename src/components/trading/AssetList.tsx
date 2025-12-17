@@ -1,17 +1,14 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import type { ServerAsset } from "../../types/server";
-import type { OrderType } from "../../types";
 
 interface AssetListProps {
-  orderType: OrderType;
   filteredAssets: ServerAsset[];
   handleStockSelect: (asset: ServerAsset) => void;
   showAssetList: (state: boolean) => void;
 }
 
 const AssetList: React.FC<AssetListProps> = ({
-  orderType,
   filteredAssets,
   handleStockSelect,
   showAssetList,
@@ -54,9 +51,7 @@ const AssetList: React.FC<AssetListProps> = ({
               </div>
               <div className="text-sm">
                 $
-                {orderType === "Buy"
-                  ? s.ASK_PRICE.toFixed(2)
-                  : s.BID_PRICE.toFixed(2)}{" "}
+                {s.LAST_TRADED_PRICE}
               </div>{" "}
             </div>
           </button>
