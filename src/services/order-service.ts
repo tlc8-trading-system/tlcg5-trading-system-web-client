@@ -1,3 +1,5 @@
+import type { ServerActiveTrade } from "../types/server";
+
 /**
  * Args:
  *      Take active positions of user
@@ -16,18 +18,14 @@ export const checkIfUserOwnsAsset = () => {
  * return profit and loss for active trade
  */
 
-export const profitLoss = () => {
+export const profitLoss = (order: ServerActiveTrade) => {
     /**
      * if buy (current price - entry price) * quantity 
      * if entry (current price - current price) * quantity 
      */
-    return 10.00
-}
-
-export const profitLossPercent = () => {
-    /**
-     * if buy (current price - entry price) * quantity 
-     * if entry (current price - current price) * quantity 
-     */
-    return 2
+    if (order.side === "BUY") {
+        return (order.filledPrice - order.requested_price) * order.filledQuantity;
+    } else {
+        return (order.requested_price - order.filledPrice) * order.filledQuantity;
+    }
 }

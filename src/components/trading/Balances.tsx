@@ -6,7 +6,9 @@ const Balances = () => {
   const { data, isLoading, error } = useUserBalance();
   
   let balance = data?.data?.balance;
+  const availableBalace = data?.data?.availableBalance;
   if (error) balance = 0;
+  
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <Card className="shadow-sm">
@@ -19,8 +21,8 @@ const Balances = () => {
             {isLoading
               ? "..."
               : JSON.stringify(balance) == undefined
-              ? balance
-              : (+JSON.stringify(balance)).toFixed(2)}
+              ? availableBalace
+              : (+JSON.stringify(availableBalace)).toFixed(2)}
             {error && (
               <p className="text-sm text-destructive">
                 Failed to fetch user balance
@@ -36,7 +38,7 @@ const Balances = () => {
           <TrendingUp className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl text-right">$200,000</div>
+          <div className="text-2xl text-right">${balance?.toFixed(2)}</div>
         </CardContent>
       </Card>
     </div>

@@ -4,7 +4,8 @@ import { getUserBalance } from "./balance-api";
 import type { ServerResponse } from "../../../types/server";
 
 interface balanceReponse {
-  balance: number
+  balance: number;
+  availableBalance: number;
 }
 
 export const useUserBalance = () => {

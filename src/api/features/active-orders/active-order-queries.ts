@@ -7,7 +7,7 @@ import type { ServerActiveTrade, ServerResponse } from "../../../types/server";
 
 export const ModifyActiveTrade = () => {
   const onSuccess = () => {
-    toast("Trade modified successfully");
+    toast("Order modified successfully");
     queryClient.invalidateQueries({ queryKey: queryKeys.activeTrades });
   };
 
@@ -31,10 +31,10 @@ export const CloseActiveTrade = () => {
   });
 };
 
-export const useActiveTrades = () => {
+export const useActiveTrades = (clientId?: string) => {
   return useQuery<ServerResponse<ServerActiveTrade[]>>({
     queryKey: queryKeys.activeTrades,
-    queryFn: fetchActiveTrades,
+    queryFn: () => fetchActiveTrades(clientId && clientId),
     refetchInterval: 1000
   });
 };

@@ -70,9 +70,9 @@ export interface ActiveTrade {
 
 export interface ModifyActiveTrade {
   id: string;
-  symbol: string;
-  stopLoss: string;
-  takeProfit: string;
+  type: string;
+  quantity: number;
+  price?: number;
 }
 
 export interface PendingOrder {
@@ -120,4 +120,30 @@ export interface Exchange {
   name: string;
   baseUrl: string;
   enabled: boolean;
+}
+export interface Client {
+  userId: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  role: string;
+  totalValue: number;
+  profitLoss: number;
+  profitLossPercentage: string;
+  portfolioCount: number;
+  balance: number;
+  activeTradesCount: number;
+  createdAt: string;
+  deletedAt: string | null;
+}
+
+export interface ClientDetail {
+  email: string;
+  firstname: string;
+  id: string;
+  image?: string;
+  lastname: string;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
 }
